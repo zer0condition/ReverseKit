@@ -53,9 +53,9 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
     case DLL_PROCESS_ATTACH:
         DisableThreadLibraryCalls(hModule);
 
-        SetConsoleTitleA("ReverseKit Attached");
-
         AllocConsole();
+
+        SetConsoleTitleA("ReverseKit Attached");
 
         FILE* pFile;
         freopen_s(&pFile, "CONOUT$", "w", stdout);

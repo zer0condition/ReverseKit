@@ -25,7 +25,6 @@ NTSTATUS NTAPI hkNtCreateThreadEx(OUT PHANDLE ThreadHandle, IN ACCESS_MASK Desir
         return STATUS_SUCCESS;
     }
 
-
     printf("[ReverseKit] Accepted NtCreateThreadEx for %p\n", StartRoutine);
 
     return oNtCreateThreadEx(ThreadHandle, DesiredAccess, ObjectAttributes, ProcessHandle, StartRoutine, Argument, CreateFlags, StackZeroBits, SizeOfStackCommit, SizeOfStackReserve, BytesBuffer);
