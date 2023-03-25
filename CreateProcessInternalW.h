@@ -30,18 +30,7 @@ BOOL WINAPI hkCreateProcessInternalW(
     LPPROCESS_INFORMATION lpProcessInformation,
     PHANDLE hNewToken)
 {
-
-    char message[256];
-    sprintf(message, "Block Commands Intercepted: %ls?", lpCommandLine);
-
-    int result = MessageBoxA(NULL, message, "[ReverseKit] CreateProcessInternalW", MB_YESNO);
-
-    if (result == IDYES) {
-        printf("[ReverseKit] Blocked Commands: %ls\n", lpCommandLine);
-        return TRUE;
-    }
-
-    printf("[ReverseKit] Accepted Commands: %ls\n", lpCommandLine);
+    printf("[ReverseKit] Commands Intercepted: %ls\n", lpCommandLine);
 
     return oCreateProcessInternalW(hUserToken, lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation, hNewToken);
 }
