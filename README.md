@@ -6,7 +6,7 @@
 ![Imgur](https://i.imgur.com/ExrfWGQ.png)
 
 
-1. <b>Imports Information</b> - Prints all the imports with the origin dll name, function name and addresses respectively.
+1. <b>Imports information</b> - Prints all the imports with the origin dll name, function name and addresses respectively.
 
 
 ![Imgur](https://i.imgur.com/PWuwnI6.png)
