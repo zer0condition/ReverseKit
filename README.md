@@ -9,4 +9,10 @@
 1. <b>Intercept all system/shell commands</b> - Hooks CreateProcessInternalW for intercepting all system/shell commands, even hidden ones.
 
 
+
+
+
+
+
+
 <b>Work in progress, adding more necessary features.</b>
