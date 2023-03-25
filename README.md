@@ -1,6 +1,6 @@
 # ReverseKit
 
-<b>ReverseKit - Reverse Engineering Aid<\b>
+<b>ReverseKit - Reverse Engineering Aid</b>
 
 ### Features
 
