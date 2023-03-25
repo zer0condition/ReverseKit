@@ -5,5 +5,4 @@
 ### Features
 
 
-> Intercept all system/shell commands </b> Hooks CreateProcessInternalW for intercepting all system/shell commands, even hidden ones called by ShellExecuteEx
-
+Intercept all system/shell commands - Hooks CreateProcessInternalW for intercepting all system/shell commands, even hidden ones called by ShellExecuteEx
