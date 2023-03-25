@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <fstream>
 
 #include "ReverseHook.h"
 #include "CreateProcessInternalW.h"
@@ -48,6 +49,11 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
     case DLL_PROCESS_ATTACH:
         SetConsoleTitleA("ReverseKit Attached");
 
+        AllocConsole();
+
+        FILE* pFile;
+        freopen_s(&pFile, "CONOUT$", "w", stdout);
+
         // Imports info
         GetImportsFromIAT();
 
@@ -58,6 +64,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
         break;
 
     case DLL_PROCESS_DETACH:
+        FreeConsole();
         ReverseHook::unhook(oCreateProcessInternalW, original_bytes);
         break;
     }
