@@ -25,5 +25,8 @@
     <ClInclude Include="CreateProcessInternalW.h">
       <Filter>Hooks</Filter>
     </ClInclude>
+    <ClInclude Include="NtCreateThreadEx.h">
+      <Filter>Hooks</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,12 +1,16 @@
 #include <Windows.h>
 #include <stdio.h>
 #include <stdint.h>
-#include <fstream>
+#include <winternl.h>
+#include <ntstatus.h>
 
 #include "ReverseHook.h"
-#include "CreateProcessInternalW.h"
 
-unsigned char original_bytes[14];
+#include "CreateProcessInternalW.h"
+#include "NtCreateThreadEx.h"
+
+unsigned char original_createprocess_bytes[14];
+unsigned char original_createthread_bytes[14];
 
 void GetImportsFromIAT()
 {
@@ -47,6 +51,8 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
+        DisableThreadLibraryCalls(hModule);
+
         SetConsoleTitleA("ReverseKit Attached");
 
         AllocConsole();
@@ -59,13 +65,17 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 
         // Place hooks
         oCreateProcessInternalW = (CreateProcessInternalW_t)GetProcAddress(GetModuleHandleA("kernelbase.dll"), "CreateProcessInternalW");
-        ReverseHook::hook(oCreateProcessInternalW, hkCreateProcessInternalW, original_bytes);
+        ReverseHook::hook(oCreateProcessInternalW, hkCreateProcessInternalW, original_createprocess_bytes);
+
+        oNtCreateThreadEx = (NtCreateThreadEx_t)GetProcAddress(GetModuleHandleA("ntdll.dll"), "NtCreateThreadEx");
+        ReverseHook::hook(oNtCreateThreadEx, hkNtCreateThreadEx, original_createthread_bytes);
 
         break;
 
     case DLL_PROCESS_DETACH:
         FreeConsole();
-        ReverseHook::unhook(oCreateProcessInternalW, original_bytes);
+        ReverseHook::unhook(oCreateProcessInternalW, original_createprocess_bytes);
+        ReverseHook::unhook(oNtCreateThreadEx, original_createthread_bytes);
         break;
     }
     return TRUE;
