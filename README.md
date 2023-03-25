@@ -1,6 +1,6 @@
 # ReverseKit
 Dynamic RE Kit
-ReverseKit - Reverse Engineering Aid
+<b>ReverseKit - Reverse Engineering Aid<\b>
 
 ### Features
 
