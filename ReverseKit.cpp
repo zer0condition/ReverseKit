@@ -19,7 +19,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
         break;
 
     case DLL_PROCESS_DETACH:
-       ReverseHook::unhook(oCreateProcessInternalW, original_bytes);
+        ReverseHook::unhook(oCreateProcessInternalW, original_bytes);
         break;
     }
     return TRUE;
