@@ -27,13 +27,13 @@ void GetImportsFromIAT()
             if (pThunkOrig->u1.Ordinal & IMAGE_ORDINAL_FLAG)
             {
                 pAddress = (DWORD*)&pThunk->u1.Function;
-                printf("DLL: %s, Ordinal: %u, Address: %p\n", (char*)((BYTE*)hModule + pImportDesc->Name), IMAGE_ORDINAL(pThunkOrig->u1.Ordinal), (void*)*pAddress);
+                printf("[ReverseKit] DLL: %s, Ordinal: %u, Address: %p\n", (char*)((BYTE*)hModule + pImportDesc->Name), IMAGE_ORDINAL(pThunkOrig->u1.Ordinal), (void*)*pAddress);
             }
             else
             {
                 PIMAGE_IMPORT_BY_NAME pImportByName = (PIMAGE_IMPORT_BY_NAME)((BYTE*)hModule + pThunkOrig->u1.AddressOfData);
                 pAddress = (DWORD*)&pThunk->u1.Function;
-                printf("DLL: %s, Function: %s, Address: %p\n", (char*)((BYTE*)hModule + pImportDesc->Name), pImportByName->Name, (void*)*pAddress);
+                printf("[ReverseKit] DLL: %s, Function: %s, Address: %p\n", (char*)((BYTE*)hModule + pImportDesc->Name), pImportByName->Name, (void*)*pAddress);
             }
             pThunk++;
             pThunkOrig++;
