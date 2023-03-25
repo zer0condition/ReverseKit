@@ -4,6 +4,6 @@
 
 ### Features
 
-<ul>
+<ol>
 Intercept all system/shell commands - Hooks CreateProcessInternalW for intercepting all system/shell commands, even hidden ones called by ShellExecuteEx
-</ul>
+</ol>
