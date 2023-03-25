@@ -7,4 +7,4 @@
 <ol>
 1. Intercept all system/shell commands - Hooks CreateProcessInternalW for intercepting all system/shell commands, even hidden ones called by ShellExecuteEx
 </ol>
-![Imgur Image](https://i.imgur.com/PWuwnI6.png)
+![Imgur](https://i.imgur.com/PWuwnI6.png)
