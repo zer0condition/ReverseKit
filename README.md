@@ -12,3 +12,8 @@ Hooking library - Normal JMP instruction hook and trampoline hook.
 4. <b>Debugger check bypass </b> - Hooks IsDebuggerPresent and CheckRemoteDebuggerPresent and returns FALSE.
 
 <b>Work in progress, adding more necessary features.</b>
+
+Some images:
+![Imgur](https://i.imgur.com/ExrfWGQ.png)
+![Imgur](https://i.imgur.com/PWuwnI6.png)
+![Imgur](https://i.imgur.com/a7uPFmH.png)
