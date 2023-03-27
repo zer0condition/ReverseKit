@@ -5,7 +5,11 @@ IsDebuggerPresent_t oIsDebuggerPresent;
 
 BOOL WINAPI hkIsDebuggerPresent(VOID)
 {
-    printf("[ReverseKit] IsDebuggerPresent called\n");
+    InterceptedCallInfo info;
+    info.functionName = "IsDebuggerPresent";
+    info.additionalInfo = "returned false";
+
+    interceptedCalls.push_back(info);
 
     return FALSE;
 }

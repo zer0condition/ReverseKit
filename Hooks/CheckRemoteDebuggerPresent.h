@@ -6,8 +6,13 @@ CheckRemoteDebuggerPresent_t oCheckRemoteDebuggerPresent;
 
 BOOL WINAPI hkCheckRemoteDebuggerPresent(HANDLE hProcess, PBOOL pbDebuggerPresent)
 {
-    printf("[ReverseKit] CheckRemoteDebuggerPresent called\n");
+    InterceptedCallInfo info;
+    info.functionName = "CheckRemoteDebuggerPresent";
+    info.additionalInfo = "pbDebuggerPresent returned false";
+
+    interceptedCalls.push_back(info);
 
     *pbDebuggerPresent = FALSE;
+
     return TRUE;
 }

@@ -14,18 +14,21 @@ NTSTATUS NTAPI hkNtCreateThreadEx(OUT PHANDLE ThreadHandle, IN ACCESS_MASK Desir
     IN ULONG CreateFlags, IN SIZE_T StackZeroBits, IN SIZE_T SizeOfStackCommit,
     IN SIZE_T SizeOfStackReserve, OUT LPVOID BytesBuffer)
 {
+    InterceptedCallInfo Temp;
 
-    char message[256];
-    sprintf(message, "Block thread creation for %p?", StartRoutine);
+    Temp.functionName = "NtCreateThreadEx";
 
-    int result = MessageBoxA(NULL, message, "[ReverseKit] NtCreateThreadEx", MB_YESNO);
+    char buffer[64];
+    sprintf(buffer, "Created Thread: %p", StartRoutine);
+    Temp.additionalInfo = buffer;
 
-    if (result == IDYES) {
-        printf("[ReverseKit] Blocked NtCreateThreadEx for %p\n", StartRoutine);
-        return STATUS_SUCCESS;
-    }
+    interceptedCalls.push_back(Temp);
 
-    printf("[ReverseKit] Accepted NtCreateThreadEx for %p\n", StartRoutine);
+    ReverseHook::unhook(oNtCreateThreadEx, original_createthread_bytes);
 
-    return oNtCreateThreadEx(ThreadHandle, DesiredAccess, ObjectAttributes, ProcessHandle, StartRoutine, Argument, CreateFlags, StackZeroBits, SizeOfStackCommit, SizeOfStackReserve, BytesBuffer);
+    auto result = oNtCreateThreadEx(ThreadHandle, DesiredAccess, ObjectAttributes, ProcessHandle, StartRoutine, Argument, CreateFlags, StackZeroBits, SizeOfStackCommit, SizeOfStackReserve, BytesBuffer);
+
+    ReverseHook::hook(oNtCreateThreadEx, hkNtCreateThreadEx, original_createthread_bytes);
+
+    return result;
 }

@@ -31,7 +31,6 @@ namespace ReverseHook {
         VirtualProtect(original_function, 14, oldProtect, &oldProtect);
     }
 
-
     namespace Trampoline {
         void* createTrampoline(void* original_function) {
             void* trampoline = VirtualAlloc(NULL, 14 + sizeof(void*), MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);

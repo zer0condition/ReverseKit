@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Hooks">
       <UniqueIdentifier>{6fac21d3-8fc7-4024-ab12-4ada62713cee}</UniqueIdentifier>
     </Filter>
@@ -12,33 +8,106 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{58a6a537-02e2-409f-b5f1-8b298caab9bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{d1a3f403-91bd-4369-9ba9-f57d64cf46a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Imports">
+      <UniqueIdentifier>{0d162358-ff25-4b1f-a659-76ff0b019547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hooks\Syscalls">
+      <UniqueIdentifier>{48bd057a-b621-487e-854d-26deca20a4ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{e506a67f-d146-404b-a7bf-2bc1a77ab517}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ReverseKit.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_dx9.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_tables.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ReverseKit.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Hooks\CheckRemoteDebuggerPresent.h">
-      <Filter>Hooks</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\CreateProcessInternalW.h">
-      <Filter>Hooks</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\InternetOpenUrlW.h">
-      <Filter>Hooks</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\IsDebuggerPresent.h">
-      <Filter>Hooks</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\NtCreateThreadEx.h">
-      <Filter>Hooks</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\URLDownloadToFileW.h">
-      <Filter>Hooks</Filter>
-    </ClInclude>
     <ClInclude Include="ReverseLib\ReverseHook.h">
       <Filter>ReverseLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_dx9.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_win32.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\D3DWindow.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\ImGuiSetup.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Imports\Imports.h">
+      <Filter>Imports</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\SetHooks.h">
+      <Filter>Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\URLDownloadToFileA.h">
+      <Filter>Hooks\Syscalls</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\NtCreateThreadEx.h">
+      <Filter>Hooks\Syscalls</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\IsDebuggerPresent.h">
+      <Filter>Hooks\Syscalls</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\InternetOpenUrlW.h">
+      <Filter>Hooks\Syscalls</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\CreateProcessInternalW.h">
+      <Filter>Hooks\Syscalls</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\CheckRemoteDebuggerPresent.h">
+      <Filter>Hooks\Syscalls</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\Menu.h">
+      <Filter>Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -130,6 +130,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ImGui\imgui.cpp" />
+    <ClCompile Include="ImGui\imgui_demo.cpp" />
+    <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_dx9.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="ImGui\imgui_tables.cpp" />
+    <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="ReverseKit.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,8 +145,21 @@
     <ClInclude Include="Hooks\InternetOpenUrlW.h" />
     <ClInclude Include="Hooks\IsDebuggerPresent.h" />
     <ClInclude Include="Hooks\NtCreateThreadEx.h" />
-    <ClInclude Include="Hooks\URLDownloadToFileW.h" />
+    <ClInclude Include="Hooks\SetHooks.h" />
+    <ClInclude Include="Hooks\URLDownloadToFileA.h" />
+    <ClInclude Include="ImGui\imconfig.h" />
+    <ClInclude Include="ImGui\imgui.h" />
+    <ClInclude Include="ImGui\imgui_impl_dx9.h" />
+    <ClInclude Include="ImGui\imgui_impl_win32.h" />
+    <ClInclude Include="ImGui\imgui_internal.h" />
+    <ClInclude Include="ImGui\imstb_rectpack.h" />
+    <ClInclude Include="ImGui\imstb_textedit.h" />
+    <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="Imports\Imports.h" />
+    <ClInclude Include="Menu\Menu.h" />
     <ClInclude Include="ReverseLib\ReverseHook.h" />
+    <ClInclude Include="Window\D3DWindow.h" />
+    <ClInclude Include="Window\ImGuiSetup.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

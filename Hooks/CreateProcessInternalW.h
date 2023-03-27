@@ -30,7 +30,18 @@ BOOL WINAPI hkCreateProcessInternalW(
     LPPROCESS_INFORMATION lpProcessInformation,
     PHANDLE hNewToken)
 {
-    printf("[ReverseKit] Commands Intercepted: %ls\n", lpCommandLine);
+    InterceptedCallInfo Temp;
 
-    return oCreateProcessInternalW(hUserToken, lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation, hNewToken);
+    Temp.functionName = "CreateProcessInternalW";
+    Temp.additionalInfo = ws2s(lpCommandLine).c_str();
+
+    interceptedCalls.push_back(Temp);
+
+    ReverseHook::unhook(oCreateProcessInternalW, original_createprocess_bytes);
+
+    auto result = oCreateProcessInternalW(hUserToken, lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation, hNewToken);
+
+    ReverseHook::hook(oCreateProcessInternalW, hkCreateProcessInternalW, original_createprocess_bytes);
+
+    return result;
 }
