@@ -13,7 +13,5 @@ Hooking library - Normal JMP instruction hook and trampoline hook.
 
 <b>Work in progress, adding more necessary features.</b>
 
-Some images:
-![Imgur](https://i.imgur.com/ExrfWGQ.png)
-![Imgur](https://i.imgur.com/PWuwnI6.png)
-![Imgur](https://i.imgur.com/a7uPFmH.png)
+
+[![Video Showcase](https://img.youtube.com/vi/3P8ck5U_OXY/maxresdefault.jpg)](https://www.youtube.com/watch?v=3P8ck5U_OXY)
