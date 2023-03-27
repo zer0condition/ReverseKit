@@ -21,7 +21,8 @@ void DrawImports()
     ImGui::End();
 }
 
-void DrawThreadInformation() {
+void DrawThreadInformation()
+{
     ImGui::Begin("[ReverseKit] Active Threads");
     ImGui::SetWindowSize(ImVec2(600, 400), ImGuiCond_Once);
 
