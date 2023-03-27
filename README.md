@@ -8,7 +8,6 @@
   <img src="https://img.shields.io/github/forks/zer0condition/reversekit" alt="Forks">
 </p>
 <p>ReverseKit is a comprehensive toolkit designed to aid reverse engineers in the process of dynamic reverse engineering. With a wide range of features and functionalities, it provides an easy-to-use interface and helps you intercept, analyze, and manipulate code and data during runtime.</p>
-<p>This project is licensed under the terms of the MIT license.</p>
 <p>
   <a href="#features">Features</a> •
   <a href="#getting-started">Getting Started</a> •
@@ -41,7 +40,7 @@
 <h2>Contributing</h2>
 <p>We welcome contributions from the community. If you find a bug or have an idea for a new feature, please open an issue or submit a pull request.</p>
 <h2>License</h2>
-<p>ReverseKit is released under the MIT license.</p>
+<p>This project is licensed under the terms of the MIT license.</p>
 <h2>YouTube Showcase</h2>
 <div>
   <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY"><img src="https://i.imgur.com/eEoylM5.png" alt="ReverseKit demo video"></a>
