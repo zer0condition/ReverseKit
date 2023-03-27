@@ -12,7 +12,7 @@
 <p>
   <a href="#features">Features</a> •
   <a href="#getting-started">Getting Started</a> •
-  <a href="#usage">Usage</a>
+  <a href="#usage">Usage</a> <br>
   <a href="#contributing">Contributing</a> •
   <a href="#license">License</a> •
   <a href="#youtube-showcase">Showcase</a>
