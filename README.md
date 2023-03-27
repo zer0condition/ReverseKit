@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/github/stars/zer0condition/reversekit" alt="Stars">
   <img src="https://img.shields.io/github/forks/zer0condition/reversekit" alt="Forks">
 </p>
-<p>ReverseKit is a comprehensive toolkit designed to aid reverse engineers in the process of dynamic reverse engineering. With a wide range of features and functionalities, it provides an easy-to-use interface and helps you intercept, analyze, and manipulate code and data during runtime.</p>
+<p>ReverseKit is a comprehensive toolkit designed to aid reverse engineers in the process of dynamic RE. With a wide range of features and functionalities, it provides an easy-to-use interface and helps you intercept, analyze, and manipulate code and data during runtime.</p>
 <p>
   <a href="#features">Features</a> •
   <a href="#getting-started">Getting Started</a> •
