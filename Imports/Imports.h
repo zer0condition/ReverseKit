@@ -1,6 +1,5 @@
 #pragma once
 
-
 struct ImportInfo {
     std::string dllName;
     std::string functionName;
