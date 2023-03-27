@@ -59,10 +59,10 @@ void HookSyscalls() {
 }
 
 void UnhookSyscalls() {
-    ReverseHook::Trampoline::unhook(oCreateProcessInternalW, original_createprocess_bytes);
-    ReverseHook::Trampoline::unhook(oNtCreateThreadEx, original_createthread_bytes);
-    ReverseHook::Trampoline::unhook(oURLDownloadToFileA, original_urlmoniker_bytes);
-    ReverseHook::Trampoline::unhook(oInternetOpenUrlW, original_openurl_bytes);
-    ReverseHook::Trampoline::unhook(oIsDebuggerPresent, original_isdebug_bytes);
-    ReverseHook::Trampoline::unhook(oCheckRemoteDebuggerPresent, original_remotedebug_bytes);
+    ReverseHook::unhook(oCreateProcessInternalW, original_createprocess_bytes);
+    ReverseHook::unhook(oNtCreateThreadEx, original_createthread_bytes);
+    ReverseHook::unhook(oURLDownloadToFileA, original_urlmoniker_bytes);
+    ReverseHook::unhook(oInternetOpenUrlW, original_openurl_bytes);
+    ReverseHook::unhook(oIsDebuggerPresent, original_isdebug_bytes);
+    ReverseHook::unhook(oCheckRemoteDebuggerPresent, original_remotedebug_bytes);
 }
