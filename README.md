@@ -1,23 +1,24 @@
-<h1 align="center">
-  <img src="https://i.imgur.com/q92np0W.png" alt="ReverseKit Logo"><br>
-  ReverseKit - Dynamic Reverse Engineering Toolkit
+<h1 align="left">
+  ReverseKit - Dynamic Reverse Engineering Toolkit<br>
+  <img src="https://i.imgur.com/q92np0W.png" alt="ReverseKit Logo" align="right">
 </h1>
-<p align="center">
-  <img src="https://img.shields.io/github/license/zer0condition/reversekit" alt="License">
+<p align="left">
+  <img src="https://img.shields.io/github/license/zer0condition/reversekit?style=flat-square" alt="License">
   <img src="https://img.shields.io/github/stars/zer0condition/reversekit" alt="Stars">
   <img src="https://img.shields.io/github/forks/zer0condition/reversekit" alt="Forks">
 </p>
-<p>ReverseKit is a comprehensive toolkit designed to aid reverse engineers in the process of dynamic reverse engineering. With a wide range of features and functionalities, it provides an easy-to-use interface and helps you intercept, analyze, and manipulate code and data during runtime.</p>
+<p>ReverseKit is a comprehensive toolkit designed to aid reverse engineers in the process of dynamic RE. With a wide range of features and functionalities, it provides an easy-to-use interface and helps you intercept, analyze, and manipulate code and data during runtime.</p>
 <p>
   <a href="#features">Features</a> •
   <a href="#getting-started">Getting Started</a> •
-  <a href="#usage">Usage</a> •
-  <a href="#contributing">Contributing</a>
+  <a href="#usage">Usage</a> <br>
+  <a href="#contributing">Contributing</a> •
+  <a href="#license">License</a> •
+  <a href="#youtube-showcase">Showcase</a>
 </p>
-
 <h2>Features</h2>
 <ul>
-  <li>Imports information - along withDLL name, function name, and address.</li>
+  <li>Imports information - along with DLL name, function name, and address.</li>
   <li>Intercept all commands executed - system(), ShellExecuteEx(), etc.</li>
   <li>Intercept URLs - APIs like UrlDownloadToFileA and InternetOpenUrlA, etc.</li>
   <li>Bypass common debugger checks - CheckRemoteDebugger() and IsDebuggerPresent().</li>
@@ -38,7 +39,9 @@
 </ul>
 <h2>Contributing</h2>
 <p>We welcome contributions from the community. If you find a bug or have an idea for a new feature, please open an issue or submit a pull request.</p>
+<h2>License</h2>
+<p>This project is licensed under the terms of the MIT license.</p>
 <h2>YouTube Showcase</h2>
 <div>
-  <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY"><img src="https://i.imgur.com/eEoylM5.png" alt="ReverseKit demo video"></a>
+  <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY"><img src="https://i.imgur.com/uGuwNif.png" alt="ReverseKit demo video"></a>
 </div>
