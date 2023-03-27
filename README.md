@@ -20,10 +20,11 @@
 <ul>
   <li>Imports information - along with DLL name, function name, and address.</li>
   <li>Intercept all commands executed - system(), ShellExecuteEx(), etc.</li>
+  <li>Intercept all thread creations - APIs like std::thread, CreateThread(), etc.</li>
   <li>Intercept URLs - APIs like UrlDownloadToFileA and InternetOpenUrlA, etc.</li>
+  <li>Threads - lists thread ids along with cpu usage, allows you to suspent them with a button.</li>
   <li>Bypass common debugger checks - CheckRemoteDebugger() and IsDebuggerPresent().</li>
   <li>Easy-to-use interface powered by ImGui.</li>
-  <li>Intercept all thread creations - APIs like std::thread, CreateThread(), etc.</li>
   <li>Hook library with a normal JMP hook and trampoline hook.</li>
 </ul>
 <h2>Getting Started</h2>
@@ -32,6 +33,7 @@
 <p>ReverseKit provides a user-friendly interface that enables you to easily intercept, analyze, and manipulate code and data during runtime. With the wide range of features and functionalities, you can:</p>
 <ul>
   <li>Monitor and intercept system calls and API functions</li>
+  <li>Monitor CPU usage by active threads and option to suspend</li>
   <li>Analyze network traffic and intercept URLs</li>
   <li>Analyze and manipulate thread creations</li>
   <li>Hook into binary code and redirect execution flow</li>
