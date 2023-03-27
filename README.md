@@ -43,5 +43,5 @@
 <p>This project is licensed under the terms of the MIT license.</p>
 <h2>YouTube Showcase</h2>
 <div>
-  <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY"><img src="https://i.imgur.com/Q6kVRN7.png" alt="ReverseKit demo video"></a>
+  <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY"><img src="https://i.imgur.com/uGuwNif.png" alt="ReverseKit demo video"></a>
 </div>
