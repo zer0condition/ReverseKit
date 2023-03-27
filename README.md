@@ -13,6 +13,7 @@
   <a href="#getting-started">Getting Started</a> •
   <a href="#usage">Usage</a> •
   <a href="#contributing">Contributing</a>
+  <a href="#youtube-showcase">Video Showcase</a>
 </p>
 
 <h2>Features</h2>
