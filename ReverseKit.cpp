@@ -32,6 +32,7 @@ struct InterceptedCallInfo {
 std::vector<InterceptedCallInfo> interceptedCalls;
 
 #include "Imports/Imports.h"
+#include "Threads/Threads.h"
 #include "Hooks/SetHooks.h"
 #include "Menu/Menu.h"
 
@@ -65,6 +66,7 @@ DWORD WINAPI RenderThread(LPVOID lpParameter)
         ImGui::NewFrame();
 
         DrawImports();
+        DrawThreadInformation();
         DrawHookedFunctions(); 
 
         ImGui::EndFrame();
@@ -103,6 +105,7 @@ DWORD WINAPI RetrievalThread(LPVOID lpParameter)
 {
     for (;;) {
         GetImportsFromIAT();
+        GetThreadInformation();
         Sleep(10000);
     }
 }

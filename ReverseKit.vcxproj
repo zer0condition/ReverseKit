@@ -78,6 +78,7 @@
     <ClInclude Include="Imports\Imports.h" />
     <ClInclude Include="Menu\Menu.h" />
     <ClInclude Include="ReverseLib\ReverseHook.h" />
+    <ClInclude Include="Threads\Threads.h" />
     <ClInclude Include="Window\D3DWindow.h" />
     <ClInclude Include="Window\ImGuiSetup.h" />
   </ItemGroup>

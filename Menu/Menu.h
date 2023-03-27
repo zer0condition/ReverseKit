@@ -21,6 +21,34 @@ void DrawImports()
     ImGui::End();
 }
 
+void DrawThreadInformation() {
+    ImGui::Begin("[ReverseKit] Active Threads");
+    ImGui::SetWindowSize(ImVec2(600, 400), ImGuiCond_Once);
+
+    ImGui::Columns(3, "thread_columns", true);
+
+    ImGui::Text("Thread ID"); ImGui::NextColumn();
+    ImGui::Text("CPU Usage"); ImGui::NextColumn();
+    ImGui::Text(""); ImGui::NextColumn();
+    ImGui::Separator();
+
+    for (auto& info : threadInfo) {
+        ImGui::Text("%lu", info.threadId); ImGui::NextColumn();
+        ImGui::Text("%u%%", info.cpuUsage); ImGui::NextColumn();
+
+        if (ImGui::Button("Suspend")) {
+            HANDLE hThread = OpenThread(THREAD_SUSPEND_RESUME, FALSE, info.threadId);
+            if (hThread != NULL) {
+                SuspendThread(hThread);
+                CloseHandle(hThread);
+            }
+        }
+        ImGui::NextColumn();
+    }
+
+    ImGui::End();
+}
+
 void DrawHookedFunctions()
 {
     ImGui::Begin("[ReverseKit] Hooked Functions");

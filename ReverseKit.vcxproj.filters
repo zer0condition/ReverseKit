@@ -23,6 +23,9 @@
     <Filter Include="Menu">
       <UniqueIdentifier>{e506a67f-d146-404b-a7bf-2bc1a77ab517}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Threads">
+      <UniqueIdentifier>{b28c0e51-fb2a-410c-8afa-75bad3f730fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGui\imgui.cpp">
@@ -108,6 +111,9 @@
     </ClInclude>
     <ClInclude Include="Menu\Menu.h">
       <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Threads\Threads.h">
+      <Filter>Threads</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
