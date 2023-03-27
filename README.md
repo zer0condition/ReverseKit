@@ -4,7 +4,7 @@
 
 ### Features
 
-Hooking library = Normal JMP instruction hook and trampoline hook
+Hooking library - Normal JMP instruction hook and trampoline hook.
 
 1. <b>Imports information</b> - Prints all the imports with the origin dll name, function name and addresses respectively.
 2. <b>Intercept all system/shell/all commands</b> - Hooks CreateProcessInternalW to intercept all commands, even hidden ones.
