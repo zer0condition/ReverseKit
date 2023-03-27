@@ -133,9 +133,13 @@
     <ClCompile Include="ReverseKit.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CreateProcessInternalW.h" />
-    <ClInclude Include="NtCreateThreadEx.h" />
-    <ClInclude Include="ReverseHook.h" />
+    <ClInclude Include="Hooks\CheckRemoteDebuggerPresent.h" />
+    <ClInclude Include="Hooks\CreateProcessInternalW.h" />
+    <ClInclude Include="Hooks\InternetOpenUrlW.h" />
+    <ClInclude Include="Hooks\IsDebuggerPresent.h" />
+    <ClInclude Include="Hooks\NtCreateThreadEx.h" />
+    <ClInclude Include="Hooks\URLDownloadToFileW.h" />
+    <ClInclude Include="ReverseLib\ReverseHook.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
