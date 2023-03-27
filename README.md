@@ -19,7 +19,7 @@
 </p>
 <h2>Features</h2>
 <ul>
-  <li>Imports information - along withDLL name, function name, and address.</li>
+  <li>Imports information - along with DLL name, function name, and address.</li>
   <li>Intercept all commands executed - system(), ShellExecuteEx(), etc.</li>
   <li>Intercept URLs - APIs like UrlDownloadToFileA and InternetOpenUrlA, etc.</li>
   <li>Bypass common debugger checks - CheckRemoteDebugger() and IsDebuggerPresent().</li>
