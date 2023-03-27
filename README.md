@@ -22,7 +22,7 @@
   <li>Intercept all commands executed - system(), ShellExecuteEx(), etc.</li>
   <li>Intercept all thread creations - APIs like std::thread, CreateThread(), etc.</li>
   <li>Intercept URLs - APIs like UrlDownloadToFileA and InternetOpenUrlA, etc.</li>
-  <li>Threads - lists thread ids along with cpu usage, allows you to suspent them with a button.</li>
+  <li>Threads - lists thread ids along with cpu usage, allows you to suspend them with a button.</li>
   <li>Bypass common debugger checks - CheckRemoteDebugger() and IsDebuggerPresent().</li>
   <li>Easy-to-use interface powered by ImGui.</li>
   <li>Hook library with a normal JMP hook and trampoline hook.</li>
