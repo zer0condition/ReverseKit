@@ -14,8 +14,7 @@ std::vector<ThreadInfo> threadInfo;
 
 void GetThreadInformation() {
     DWORD processID = GetCurrentProcessId();
-
-    // Create a new vector to store the updated thread information.
+    
     std::vector<ThreadInfo> updatedThreadInfo;
 
     HANDLE hThreadSnap = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
