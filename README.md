@@ -33,7 +33,7 @@
 <p>ReverseKit provides a user-friendly interface that enables you to easily intercept, analyze, and manipulate code and data during runtime. With the wide range of features and functionalities, you can:</p>
 <ul>
   <li>Monitor and intercept system calls and API functions</li>
-  <li>Monitor and suspend active threads</li>
+  <li>Monitor CPU usage by active threads and option to suspend</li>
   <li>Analyze network traffic and intercept URLs</li>
   <li>Analyze and manipulate thread creations</li>
   <li>Hook into binary code and redirect execution flow</li>
