@@ -45,7 +45,10 @@ void DrawHookedFunctions()
             // Display the additional information for each intercepted call
             for (const auto& call : calls)
             {
-                ImGui::Text(call.additionalInfo.c_str());
+                if (ImGui::Selectable(call.additionalInfo.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick))
+                {
+                    ImGui::SetClipboardText(call.additionalInfo.c_str());
+                }
             }
         }
     }
