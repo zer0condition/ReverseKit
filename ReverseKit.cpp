@@ -106,7 +106,7 @@ DWORD WINAPI RetrievalThread(LPVOID lpParameter)
     for (;;) {
         GetImportsFromIAT();
         GetThreadInformation();
-        Sleep(10000);
+        Sleep(5000);
     }
 }
 
