@@ -7,8 +7,7 @@
 #include "Menu/Menu.h"
 #include "Window/Render.h"
 
-DWORD WINAPI RetrievalThread(LPVOID lpParameter)
-{
+DWORD WINAPI RetrievalThread(LPVOID lpParameter) {
     while (true) {
         GetImportsFromIAT();
         GetThreadInformation();
