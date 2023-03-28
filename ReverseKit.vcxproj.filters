@@ -26,6 +26,9 @@
     <Filter Include="Threads">
       <UniqueIdentifier>{b28c0e51-fb2a-410c-8afa-75bad3f730fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Window\Lib">
+      <UniqueIdentifier>{fc189522-b025-4d5a-823b-8c6be8f3a548}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGui\imgui.cpp">
@@ -115,13 +118,13 @@
     <ClInclude Include="Threads\Threads.h">
       <Filter>Threads</Filter>
     </ClInclude>
-    <ClInclude Include="Render.h">
+    <ClInclude Include="Window\Render.h">
       <Filter>Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="Window\d3dx9.lib">
-      <Filter>Window</Filter>
+    <Library Include="Window\Lib\d3dx9.lib">
+      <Filter>Window\Lib</Filter>
     </Library>
   </ItemGroup>
 </Project>
