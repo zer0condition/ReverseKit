@@ -17,6 +17,13 @@ unsigned char original_openurl_bytes[14];
 unsigned char original_isdebug_bytes[14];
 unsigned char original_remotedebug_bytes[14];
 
+struct InterceptedCallInfo {
+    std::string functionName;
+    std::string additionalInfo;
+};
+
+std::vector<InterceptedCallInfo> interceptedCalls;
+
 #include "CreateProcessInternalW.h"
 #include "NtCreateThreadEx.h"
 

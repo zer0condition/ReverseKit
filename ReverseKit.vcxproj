@@ -60,6 +60,8 @@
     <ClCompile Include="ReverseKit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Render.h" />
+    <ClInclude Include="Includes.h" />
     <ClInclude Include="Hooks\CheckRemoteDebuggerPresent.h" />
     <ClInclude Include="Hooks\CreateProcessInternalW.h" />
     <ClInclude Include="Hooks\InternetOpenUrlW.h" />

@@ -3,6 +3,9 @@
 
 void DrawThreadInformation() 
 {
+    ImVec2 pos(1300, 50);
+    ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
+
     ImGui::Columns(3, "import_columns", true);
 
     ImGui::Text("DLL Name"); ImGui::NextColumn();
@@ -19,13 +22,22 @@ void DrawThreadInformation()
     ImGui::End();
 }
 
+<<<<<<< HEAD
+
 void DrawImports()
 {
+    ImVec2 pos(700, 50);
+    ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
+
     ImGui::Begin("[ReverseKit] Imports");
+=======
+void DrawThreadInformation()
+{
+    ImGui::Begin("[ReverseKit] Active Threads");
+>>>>>>> 6f688fee0e0be9eb6a8149542a5cd200abf711f5
     ImGui::SetWindowSize(ImVec2(600, 400), ImGuiCond_Once);
 
     ImGui::Columns(3, "import_columns", true);
-
     ImGui::Text("DLL Name"); ImGui::NextColumn();
     ImGui::Text("Function Name"); ImGui::NextColumn();
     ImGui::Text("Function Address"); ImGui::NextColumn();
@@ -38,11 +50,13 @@ void DrawImports()
     }
 
     ImGui::End();
-
 }
 
 void DrawHookedFunctions()
 {
+    ImVec2 pos(300, 50);
+    ImGui::SetNextWindowPos(pos, ImGuiCond_FirstUseEver);
+
     ImGui::Begin("[ReverseKit] Hooked Functions");
     ImGui::SetWindowSize(ImVec2(400, 600), ImGuiCond_Once);
 

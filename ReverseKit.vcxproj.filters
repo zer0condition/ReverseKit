@@ -115,5 +115,7 @@
     <ClInclude Include="Threads\Threads.h">
       <Filter>Threads</Filter>
     </ClInclude>
+    <ClInclude Include="Includes.h" />
+    <ClInclude Include="Render.h" />
   </ItemGroup>
 </Project>
