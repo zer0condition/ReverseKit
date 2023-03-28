@@ -115,7 +115,13 @@
     <ClInclude Include="Threads\Threads.h">
       <Filter>Threads</Filter>
     </ClInclude>
-    <ClInclude Include="Includes.h" />
-    <ClInclude Include="Render.h" />
+    <ClInclude Include="Render.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Window\d3dx9.lib">
+      <Filter>Window</Filter>
+    </Library>
   </ItemGroup>
 </Project>

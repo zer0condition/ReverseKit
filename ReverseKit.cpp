@@ -1,11 +1,11 @@
-#include "Includes.h"
+#include "ReverseLib/Includes.h"
 #include "Window/D3DWindow.h"
 #include "Window/ImGuiSetup.h"
 #include "Imports/Imports.h"
 #include "Threads/Threads.h"
 #include "Hooks/SetHooks.h"
 #include "Menu/Menu.h"
-#include "Render.h"
+#include "Window/Render.h"
 
 DWORD WINAPI RetrievalThread(LPVOID lpParameter)
 {
