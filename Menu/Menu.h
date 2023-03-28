@@ -1,19 +1,29 @@
 #pragma once
 
-
-void DrawThreadInformation() 
+void DrawThreadInformation()
 {
-    ImGui::Columns(3, "import_columns", true);
+    ImGui::Begin("[ReverseKit] Active Threads");
+    ImGui::SetWindowSize(ImVec2(600, 400), ImGuiCond_Once);
 
-    ImGui::Text("DLL Name"); ImGui::NextColumn();
-    ImGui::Text("Function Name"); ImGui::NextColumn();
-    ImGui::Text("Function Address"); ImGui::NextColumn();
+    ImGui::Columns(3, "thread_columns", true);
+
+    ImGui::Text("Thread ID"); ImGui::NextColumn();
+    ImGui::Text("CPU Usage"); ImGui::NextColumn();
+    ImGui::Text(""); ImGui::NextColumn();
     ImGui::Separator();
 
-    for (const auto& info : imports) {
-        ImGui::Text(info.dllName.c_str()); ImGui::NextColumn();
-        ImGui::Text(info.functionName.c_str()); ImGui::NextColumn();
-        ImGui::Text("%p", info.functionAddress); ImGui::NextColumn();
+    for (auto& info : threadInfo) {
+        ImGui::Text("%lu", info.threadId); ImGui::NextColumn();
+        ImGui::Text("%u%%", info.cpuUsage); ImGui::NextColumn();
+
+        if (ImGui::Button("Suspend")) {
+            HANDLE hThread = OpenThread(THREAD_SUSPEND_RESUME, FALSE, info.threadId);
+            if (hThread != NULL) {
+                SuspendThread(hThread);
+                CloseHandle(hThread);
+            }
+        }
+        ImGui::NextColumn();
     }
 
     ImGui::End();
@@ -22,7 +32,7 @@ void DrawThreadInformation()
 void DrawImports()
 {
     ImGui::Begin("[ReverseKit] Imports");
-    ImGui::SetWindowSize(ImVec2(600, 400), ImGuiCond_Once);
+    ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Once);
 
     ImGui::Columns(3, "import_columns", true);
 
