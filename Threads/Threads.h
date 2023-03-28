@@ -52,7 +52,6 @@ void GetThreadInformation() {
         ULONGLONG systemTime = GetTickCount64() * 10000;  // Convert from milliseconds to 100-nanosecond intervals
         DWORD cpuUsage = static_cast<DWORD>((elapsedTime * 100) / systemTime);
 
-
         auto it = std::find_if(threadInfo.begin(), threadInfo.end(), [&](const ThreadInfo& info) {
             return info.threadId == te32.th32ThreadID;
             });

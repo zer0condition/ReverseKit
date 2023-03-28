@@ -24,8 +24,6 @@ bool CreateD3DDevice() {
 
     return true;
 }
-
-
 void CleanupD3DDevice()
 {
     if (g_pd3dDevice) { g_pd3dDevice->Release(); g_pd3dDevice = NULL; }
