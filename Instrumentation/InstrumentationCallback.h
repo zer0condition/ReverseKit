@@ -81,9 +81,7 @@ namespace Instrumentation
         auto NtSetInformationProcess = (NtSetInformationProcess_t)(GetProcAddress(LoadLibraryA("ntdll.dll"), "NtSetInformationProcess"));
 
         if (NtSetInformationProcess) {
-
             ProcessInstrumentationCallbackInfo_t CallbackInfo = { 0, 0, Bridge };
-
             NtSetInformationProcess(GetCurrentProcess(), (PROCESS_INFORMATION_CLASS)40, &CallbackInfo, sizeof(CallbackInfo));
 
             return true;
