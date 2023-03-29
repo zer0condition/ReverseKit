@@ -43,6 +43,18 @@
 <p>We welcome contributions from the community. If you find a bug or have an idea for a new feature, please open an issue or submit a pull request.</p>
 <h2>License</h2>
 <p>This project is licensed under the terms of the MIT license.</p>
+
+<h2>Todo</h2>
+
+
+
+- [ ] Fix instrumentation callback crashing for DLL.
+
+
+
+
+
+
 <h2>YouTube Showcase</h2>
 <div>
   <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY"><img src="https://i.imgur.com/uGuwNif.png" alt="ReverseKit demo video"></a>
