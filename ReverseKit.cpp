@@ -8,10 +8,11 @@
 #include "Menu/Menu.h"
 #include "Window/Render.h"
 
+
 DWORD WINAPI RetrievalThread(LPVOID lpParameter) 
 {
     /*
-    * Crashing, fixing it asap
+    * Crashing, fixing it asap.
     if (!Instrumentation::Initialize()) {
         printf("[ReverseKit] Instrumentation::Initialize() failed\n");
     }

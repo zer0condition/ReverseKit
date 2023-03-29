@@ -23,11 +23,11 @@ namespace Instrumentation
         BridgeFunction_t Callback;
     };
 
-    DWORD TlsIndex;
+    bool HandlingSyscall = false;
 
     void SymbolInitialize() {
         SymSetOptions(SYMOPT_UNDNAME);
-        SymInitialize((HANDLE)-1, nullptr, true);
+        SymInitialize(GetCurrentProcess(), nullptr, true);
     }
 
     std::string ParseFunction(void* Address, uint64_t* Output) {
@@ -63,41 +63,13 @@ namespace Instrumentation
         return OutputString;
     }
 
-    bool* GetThreadDataPointer() {
-        void* ThreadData = TlsGetValue(TlsIndex);
-
-        if (ThreadData == NULL) {
-            ThreadData = reinterpret_cast<void*>(LocalAlloc(LPTR, 256));
-
-            if (ThreadData == NULL) {
-                return NULL;
-            }
-
-            RtlZeroMemory(ThreadData, 256);
-
-            if (!TlsSetValue(TlsIndex, ThreadData)) {
-                return NULL;
-            }
-        }
-
-        return (bool*)ThreadData;
-    }
-
     bool SetThreadHandlingSyscall(bool value) {
-        if (auto DataPointer = GetThreadDataPointer()) {
-            *DataPointer = value;
-            return true;
-        }
-
-        return false;
+        HandlingSyscall = value;
+        return true;
     }
 
     bool IsThreadHandlingSyscall() {
-        if (auto DataPointer = GetThreadDataPointer()) {
-            return *DataPointer;
-        }
-
-        return false;
+        return HandlingSyscall;
     }
 
     bool Initialize()
@@ -110,12 +82,6 @@ namespace Instrumentation
 
         if (NtSetInformationProcess != NULL) {
 
-            TlsIndex = TlsAlloc();
-
-            if (TlsIndex == TLS_OUT_OF_INDEXES) {
-                return false;
-            }
-
             ProcessInstrumentationCallbackInfo_t CallbackInfo = { 0, 0, Bridge };
 
             NtSetInformationProcess(GetCurrentProcess(), (PROCESS_INFORMATION_CLASS)40, &CallbackInfo, sizeof(CallbackInfo));
@@ -126,7 +92,6 @@ namespace Instrumentation
         return false;
     }
 }
-
 
 void CallbackRoutine(CONTEXT* Ctx)
 {
