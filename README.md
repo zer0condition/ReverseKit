@@ -44,8 +44,9 @@
 <h2>License</h2>
 <p>This project is licensed under the terms of the MIT license.</p>
 
+```
 <h2>Todo</h2>
-- [ ] Fix instrumentation callback crashing for DLLs.
+- [ ] Fix instrumentation callback crashing for DLL.```
 
 <h2>YouTube Showcase</h2>
 <div>
