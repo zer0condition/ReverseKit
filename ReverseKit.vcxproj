@@ -23,6 +23,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -76,7 +77,9 @@
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="Imports\Imports.h" />
+    <ClInclude Include="Instrumentation\InstrumentationCallback.h" />
     <ClInclude Include="Menu\Menu.h" />
+    <ClInclude Include="ReverseLib\Includes.h" />
     <ClInclude Include="ReverseLib\ReverseHook.h" />
     <ClInclude Include="Threads\Threads.h" />
     <ClInclude Include="Window\D3DWindow.h" />
@@ -86,7 +89,11 @@
   <ItemGroup>
     <Library Include="Window\Lib\d3dx9.lib" />
   </ItemGroup>
+  <ItemGroup>
+    <MASM Include="Instrumentation\Bridge.asm" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
   </ImportGroup>
 </Project>

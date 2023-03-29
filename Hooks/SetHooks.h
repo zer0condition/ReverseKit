@@ -35,41 +35,46 @@ std::vector<InterceptedCallInfo> interceptedCalls;
 
 void HookSyscalls() {
     oCreateProcessInternalW = (CreateProcessInternalW_t)GetProcAddress(GetModuleHandleA("kernelbase.dll"), "CreateProcessInternalW");
-    if (oCreateProcessInternalW != NULL) {
+    if (oCreateProcessInternalW)
         ReverseHook::hook(oCreateProcessInternalW, hkCreateProcessInternalW, original_createprocess_bytes);
-    }
-    
+
     oNtCreateThreadEx = (NtCreateThreadEx_t)GetProcAddress(GetModuleHandleA("ntdll.dll"), "NtCreateThreadEx");
-    if (oNtCreateThreadEx != NULL) {
+    if (oNtCreateThreadEx)
         ReverseHook::hook(oNtCreateThreadEx, hkNtCreateThreadEx, original_createthread_bytes);
-    }
 
     oURLDownloadToFileA = (URLDownloadToFileA_t)GetProcAddress(GetModuleHandleA("urlmon.dll"), "URLDownloadToFileA");
-    if (oURLDownloadToFileA != NULL) {
+    if (oURLDownloadToFileA)
         ReverseHook::hook(oURLDownloadToFileA, hkURLDownloadToFileA, original_urlmoniker_bytes);
-    }
 
     oInternetOpenUrlW = (InternetOpenUrlW_t)GetProcAddress(GetModuleHandleA("wininet.dll"), "InternetOpenUrlW");
-    if (oInternetOpenUrlW != NULL) {
+    if (oInternetOpenUrlW)
         ReverseHook::hook(oInternetOpenUrlW, hkInternetOpenUrlW, original_openurl_bytes);
-    }
 
     oIsDebuggerPresent = (IsDebuggerPresent_t)GetProcAddress(GetModuleHandleA("kernel32.dll"), "IsDebuggerPresent");
-    if (oIsDebuggerPresent != NULL) {
+    if (oIsDebuggerPresent)
         ReverseHook::hook(oIsDebuggerPresent, hkIsDebuggerPresent, original_isdebug_bytes);
-    }
 
     oCheckRemoteDebuggerPresent = (CheckRemoteDebuggerPresent_t)GetProcAddress(GetModuleHandleA("kernel32.dll"), "CheckRemoteDebuggerPresent");
-    if (oCheckRemoteDebuggerPresent != NULL) {
+    if (oCheckRemoteDebuggerPresent)
         ReverseHook::hook(oCheckRemoteDebuggerPresent, hkCheckRemoteDebuggerPresent, original_remotedebug_bytes);
-    }
 }
 
 void UnhookSyscalls() {
-    ReverseHook::unhook(oCreateProcessInternalW, original_createprocess_bytes);
-    ReverseHook::unhook(oNtCreateThreadEx, original_createthread_bytes);
-    ReverseHook::unhook(oURLDownloadToFileA, original_urlmoniker_bytes);
-    ReverseHook::unhook(oInternetOpenUrlW, original_openurl_bytes);
-    ReverseHook::unhook(oIsDebuggerPresent, original_isdebug_bytes);
-    ReverseHook::unhook(oCheckRemoteDebuggerPresent, original_remotedebug_bytes);
+    if (oCreateProcessInternalW)
+        ReverseHook::unhook(oCreateProcessInternalW, original_createprocess_bytes);
+
+    if (oNtCreateThreadEx)
+        ReverseHook::unhook(oNtCreateThreadEx, original_createthread_bytes);
+
+    if (oURLDownloadToFileA)
+        ReverseHook::unhook(oURLDownloadToFileA, original_urlmoniker_bytes);
+
+    if (oInternetOpenUrlW)
+        ReverseHook::unhook(oInternetOpenUrlW, original_openurl_bytes);
+
+    if (oIsDebuggerPresent)
+        ReverseHook::unhook(oIsDebuggerPresent, original_isdebug_bytes);
+
+    if (oCheckRemoteDebuggerPresent)
+        ReverseHook::unhook(oCheckRemoteDebuggerPresent, original_remotedebug_bytes);
 }

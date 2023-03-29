@@ -1,5 +1,30 @@
 #pragma once
 
+void DrawInstrumentationInformation()
+{
+    ImGui::Begin("[ReverseKit] Instrumentation Logs");
+    ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Once);
+
+    ImGui::Columns(4, "instrumentation_columns");
+    ImGui::Text("Function Name"); ImGui::NextColumn();
+    ImGui::Text("Return Value"); ImGui::NextColumn();
+    ImGui::Text("Return Address"); ImGui::NextColumn();
+    ImGui::Text("Returning to"); ImGui::NextColumn();
+    ImGui::Separator();
+
+    for (const auto& entry : instrumentationCallbackInfo) {
+        ImGui::Text("%s", entry.functionName.c_str()); ImGui::NextColumn();
+        ImGui::Text("0x%p", entry.retValue); ImGui::NextColumn();
+        ImGui::Text("0x%p", entry.retAddr); ImGui::NextColumn();
+        ImGui::Text("%s+0x%x", entry.functionName.c_str(), entry.offset); ImGui::NextColumn();
+    }
+
+    instrumentationCallbackInfo.clear();
+
+    ImGui::Columns(1);
+    ImGui::End();
+}
+
 void DrawThreadInformation()
 {
     ImGui::Begin("[ReverseKit] Active Threads");
@@ -88,6 +113,7 @@ void DrawHookedFunctions()
 void RenderUI()
 {
     DrawImports();
-    DrawThreadInformation();
     DrawHookedFunctions();
+    DrawThreadInformation();
+    DrawInstrumentationInformation();
 }

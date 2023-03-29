@@ -1,4 +1,5 @@
 #include "ReverseLib/Includes.h"
+#include "Instrumentation/InstrumentationCallback.h"
 #include "Window/D3DWindow.h"
 #include "Window/ImGuiSetup.h"
 #include "Imports/Imports.h"
@@ -7,7 +8,15 @@
 #include "Menu/Menu.h"
 #include "Window/Render.h"
 
-DWORD WINAPI RetrievalThread(LPVOID lpParameter) {
+DWORD WINAPI RetrievalThread(LPVOID lpParameter) 
+{
+    /*
+    * Crashing, fixing it asap
+    if (!Instrumentation::Initialize()) {
+        printf("[ReverseKit] Instrumentation::Initialize() failed\n");
+    }
+    */
+
     while (true) {
         GetImportsFromIAT();
         GetThreadInformation();
@@ -15,7 +24,8 @@ DWORD WINAPI RetrievalThread(LPVOID lpParameter) {
     }
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) 
+{
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
