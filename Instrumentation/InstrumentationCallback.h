@@ -31,7 +31,7 @@ namespace Instrumentation
     }
 
     std::string ParseFunction(void* Address, uint64_t* Output) {
-        auto Buffer = std::malloc(sizeof(SYMBOL_INFO) + MAX_SYM_NAME);
+        auto Buffer = malloc(sizeof(SYMBOL_INFO) + MAX_SYM_NAME);
 
         if (!Buffer) {
             return "Couldn't retrieve function name.";
@@ -48,7 +48,7 @@ namespace Instrumentation
         auto Result = SymFromAddr((HANDLE)-1, (DWORD64)Address, &Displacement, symbol_information);
 
         if (!Result) {
-            std::free(Buffer);
+            free(Buffer);
             return "Couldn't retrieve function name.";
         }
 
@@ -58,7 +58,7 @@ namespace Instrumentation
 
         auto OutputString = std::string(symbol_information->Name);
 
-        std::free(Buffer);
+        free(Buffer);
 
         return OutputString;
     }

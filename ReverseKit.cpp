@@ -11,12 +11,12 @@
 
 DWORD WINAPI RetrievalThread(LPVOID lpParameter) 
 {
-    /*
-    * Crashing, fixing it asap.
+    
+    //* Crashing, fixing it asap.
     if (!Instrumentation::Initialize()) {
         printf("[ReverseKit] Instrumentation::Initialize() failed\n");
     }
-    */
+    
 
     while (true) {
         GetImportsFromIAT();
