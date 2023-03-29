@@ -56,6 +56,33 @@
       <Filter>ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ReverseKit.cpp" />
+    <ClCompile Include="Window\D3DWindow.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\ImGuiSetup.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\Render.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Threads\Threads.cpp">
+      <Filter>Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu\Menu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentation\InstrumentationCallback.cpp">
+      <Filter>Instrumentation</Filter>
+    </ClCompile>
+    <ClCompile Include="Imports\Imports.cpp">
+      <Filter>Imports</Filter>
+    </ClCompile>
+    <ClCompile Include="Hooks\SetHooks.cpp">
+      <Filter>Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="ReverseLib\ReverseHook.cpp">
+      <Filter>ReverseLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ReverseLib\ReverseHook.h">
@@ -124,12 +151,10 @@
     <ClInclude Include="Window\Render.h">
       <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="ReverseLib\Includes.h">
-      <Filter>ReverseLib</Filter>
-    </ClInclude>
     <ClInclude Include="Instrumentation\InstrumentationCallback.h">
       <Filter>Instrumentation</Filter>
     </ClInclude>
+    <ClInclude Include="Includes\Includes.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Window\Lib\d3dx9.lib">

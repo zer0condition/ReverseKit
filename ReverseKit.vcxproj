@@ -31,9 +31,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>Includes/;Hooks/;ImGui/;Imports/;Instrumentation/;Menu/;ReverseLib/;Threads/;Window/;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -51,6 +54,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Hooks\SetHooks.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
@@ -58,7 +62,15 @@
     <ClCompile Include="ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Imports\Imports.cpp" />
+    <ClCompile Include="Instrumentation\InstrumentationCallback.cpp" />
+    <ClCompile Include="Menu\Menu.cpp" />
     <ClCompile Include="ReverseKit.cpp" />
+    <ClCompile Include="ReverseLib\ReverseHook.cpp" />
+    <ClCompile Include="Threads\Threads.cpp" />
+    <ClCompile Include="Window\D3DWindow.cpp" />
+    <ClCompile Include="Window\ImGuiSetup.cpp" />
+    <ClCompile Include="Window\Render.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Hooks\CheckRemoteDebuggerPresent.h" />
@@ -77,9 +89,9 @@
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="Imports\Imports.h" />
+    <ClInclude Include="Includes\Includes.h" />
     <ClInclude Include="Instrumentation\InstrumentationCallback.h" />
     <ClInclude Include="Menu\Menu.h" />
-    <ClInclude Include="ReverseLib\Includes.h" />
     <ClInclude Include="ReverseLib\ReverseHook.h" />
     <ClInclude Include="Threads\Threads.h" />
     <ClInclude Include="Window\D3DWindow.h" />

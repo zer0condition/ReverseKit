@@ -1,4 +1,7 @@
 #pragma once
+
+
+
 typedef BOOL(WINAPI* IsDebuggerPresent_t)(VOID);
 
 IsDebuggerPresent_t oIsDebuggerPresent;
