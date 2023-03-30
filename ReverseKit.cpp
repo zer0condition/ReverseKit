@@ -8,21 +8,17 @@
 #include "Menu/Menu.h"
 #include "Window/Render.h"
 
-
-DWORD WINAPI RetrievalThread(LPVOID lpParameter) 
-{
-    /*
-    * Crashing, fixing it asap.
-    if (!Instrumentation::Initialize()) {
-        printf("[ReverseKit] Instrumentation::Initialize() failed\n");
-    }
-    */
-
+DWORD WINAPI RetrievalThread(LPVOID lpParameter) {
     while (true) {
         GetImportsFromIAT();
         GetThreadInformation();
         Sleep(5000);
     }
+}
+
+/* Unstable. */
+DWORD WINAPI InstrumentationThread(LPVOID lpParameter) {
+    return Instrumentation::Initialize();
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) 
@@ -34,6 +30,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
         HookSyscalls();
         CreateThread(nullptr, 0, RetrievalThread, nullptr, 0, nullptr);
         CreateThread(nullptr, 0, RenderThread, nullptr, 0, nullptr);
+        //CreateThread(nullptr, 0, InstrumentationThread, nullptr, 0, nullptr); // Unstable, May crash.
         break;
     case DLL_PROCESS_DETACH:
         UnhookSyscalls();

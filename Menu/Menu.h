@@ -1,27 +1,24 @@
 #pragma once
 
-void DrawInstrumentationInformation()
-{
-    ImGui::Begin("[ReverseKit] Instrumentation Logs");
+void DrawInstrumentationInformation() {
+    ImGui::Begin("[ReverseKit] Instrumentation");
     ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Once);
 
-    ImGui::Columns(4, "instrumentation_columns");
-    ImGui::Text("Function Name"); ImGui::NextColumn();
-    ImGui::Text("Return Value"); ImGui::NextColumn();
-    ImGui::Text("Return Address"); ImGui::NextColumn();
-    ImGui::Text("Returning to"); ImGui::NextColumn();
-    ImGui::Separator();
-
-    for (const auto& entry : instrumentationCallbackInfo) {
-        ImGui::Text("%s", entry.functionName.c_str()); ImGui::NextColumn();
-        ImGui::Text("0x%p", entry.retValue); ImGui::NextColumn();
-        ImGui::Text("0x%p", entry.retAddr); ImGui::NextColumn();
-        ImGui::Text("%s+0x%x", entry.functionName.c_str(), entry.offset); ImGui::NextColumn();
+    if (ImGui::Button("Clear")) {
+        function_calls.clear();
     }
 
-    instrumentationCallbackInfo.clear();
+    ImGui::Columns(2, "instrumentation_columns", true);
 
-    ImGui::Columns(1);
+    ImGui::Text("Function Name"); ImGui::NextColumn();
+    ImGui::Text("Return Address"); ImGui::NextColumn();
+    ImGui::Separator();
+
+    for (auto& call_info : function_calls) {
+        ImGui::Text("%s", call_info.function_name.c_str()); ImGui::NextColumn();
+        ImGui::Text("%p", call_info.return_address); ImGui::NextColumn();
+    }
+
     ImGui::End();
 }
 

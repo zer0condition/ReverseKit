@@ -137,7 +137,7 @@
     </Library>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="Instrumentation\Bridge.asm">
+    <MASM Include="Instrumentation\Thunk.asm">
       <Filter>Instrumentation</Filter>
     </MASM>
   </ItemGroup>

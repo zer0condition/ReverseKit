@@ -90,7 +90,7 @@
     <Library Include="Window\Lib\d3dx9.lib" />
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="Instrumentation\Bridge.asm" />
+    <MASM Include="Instrumentation\Thunk.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
