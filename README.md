@@ -14,7 +14,7 @@
   <a href="#usage">Usage</a> <br>
   <a href="#contributing">Contributing</a> •
   <a href="#license">License</a> •
-  <a href="#youtube-showcase">Showcase</a>
+  <a href="#images">Images</a>
 </p>
 <h2>Features</h2>
 <ul>
@@ -46,16 +46,14 @@
 
 <h2>Todo</h2>
 
-
-
 - [ ] Fix instrumentation callback crashing for DLL.
 
-
-
-
-
-
-<h2>YouTube Showcase</h2>
+<h2>Images</h2>
 <div>
-  <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY"><img src="https://i.imgur.com/uGuwNif.png" alt="ReverseKit demo video"></a>
+  <img src="https://i.imgur.com/jgGg4tt.jpg" alt="tab">
+</div>
+
+<h2>Youtube Video</h2>
+<div>
+  <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY"><img src="https://i.imgur.com/uGuwNif.png" alt="ReverseKit demo video" width="400"></a>
 </div>
