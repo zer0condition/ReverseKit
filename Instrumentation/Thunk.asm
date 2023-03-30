@@ -15,6 +15,7 @@ InstrumentationCallbackThunk proc
 				call    __imp_RtlCaptureContext   ; Save the current register state. RtlCaptureContext does not require shadow space
 				sub     rsp, 20h                  ; Shadow space
 				call    InstrumentationCallback   ; Call main instrumentation routine
+				int		3						  ; Interrupt 3. This should not get called
 InstrumentationCallbackThunk endp
 
 end
