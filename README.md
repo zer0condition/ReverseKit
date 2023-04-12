@@ -24,7 +24,7 @@
   <li>Intercept URLs - APIs like UrlDownloadToFileA and InternetOpenUrlA, etc.</li>
   <li>Threads - lists thread ids along with cpu usage, allows you to suspend them with a button.</li>
   <li>Bypass common debugger checks - CheckRemoteDebugger() and IsDebuggerPresent().</li>
-  <li>Anti-bsod for commmon usermode BSOD methods which abuse the RtlAdjustPrivilege.</li>
+  <li>Anti-bsod for common usermode BSOD methods which abuse the RtlAdjustPrivilege.</li>
   <li>Easy-to-use interface powered by ImGui.</li>
   <li>Hook library with a normal JMP hook and trampoline hook.</li>
 </ul>
