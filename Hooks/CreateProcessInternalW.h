@@ -1,6 +1,6 @@
 #pragma once
 
-typedef BOOL(WINAPI* CreateProcessInternalW_t)(
+typedef BOOL(NTAPI* CreateProcessInternalW_t)(
     HANDLE hUserToken,
     LPCWSTR lpApplicationName,
     LPWSTR lpCommandLine,
@@ -16,7 +16,7 @@ typedef BOOL(WINAPI* CreateProcessInternalW_t)(
 
 CreateProcessInternalW_t oCreateProcessInternalW;
 
-BOOL WINAPI hkCreateProcessInternalW(
+BOOL NTAPI hkCreateProcessInternalW(
     HANDLE hUserToken,
     LPCWSTR lpApplicationName,
     LPWSTR lpCommandLine,

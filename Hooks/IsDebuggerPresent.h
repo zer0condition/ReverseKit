@@ -1,9 +1,9 @@
 #pragma once
-typedef BOOL(WINAPI* IsDebuggerPresent_t)(VOID);
+typedef BOOL(NTAPI* IsDebuggerPresent_t)(VOID);
 
 IsDebuggerPresent_t oIsDebuggerPresent;
 
-BOOL WINAPI hkIsDebuggerPresent(VOID)
+BOOL NTAPI hkIsDebuggerPresent(VOID)
 {
     InterceptedCallInfo info;
     info.functionName = "IsDebuggerPresent";

@@ -1,10 +1,10 @@
 #pragma once
 
-typedef BOOL(WINAPI* CheckRemoteDebuggerPresent_t)(HANDLE, PBOOL);
+typedef BOOL(NTAPI* CheckRemoteDebuggerPresent_t)(HANDLE, PBOOL);
 
 CheckRemoteDebuggerPresent_t oCheckRemoteDebuggerPresent;
 
-BOOL WINAPI hkCheckRemoteDebuggerPresent(HANDLE hProcess, PBOOL pbDebuggerPresent)
+BOOL NTAPI hkCheckRemoteDebuggerPresent(HANDLE hProcess, PBOOL pbDebuggerPresent)
 {
     InterceptedCallInfo info;
     info.functionName = "CheckRemoteDebuggerPresent";

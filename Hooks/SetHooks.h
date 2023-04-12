@@ -16,6 +16,7 @@ unsigned char original_urlmoniker_bytes[14];
 unsigned char original_openurl_bytes[14];
 unsigned char original_isdebug_bytes[14];
 unsigned char original_remotedebug_bytes[14];
+unsigned char original_rtladjustprivilege_bytes[14];
 
 struct InterceptedCallInfo {
     std::string functionName;
@@ -32,6 +33,8 @@ std::vector<InterceptedCallInfo> interceptedCalls;
 
 #include "IsDebuggerPresent.h"
 #include "CheckRemoteDebuggerPresent.h"
+
+#include "RtlAdjustPrivilege.h"
 
 void HookSyscalls() {
     oCreateProcessInternalW = (CreateProcessInternalW_t)GetProcAddress(GetModuleHandleA("kernelbase.dll"), "CreateProcessInternalW");
@@ -57,6 +60,10 @@ void HookSyscalls() {
     oCheckRemoteDebuggerPresent = (CheckRemoteDebuggerPresent_t)GetProcAddress(GetModuleHandleA("kernel32.dll"), "CheckRemoteDebuggerPresent");
     if (oCheckRemoteDebuggerPresent)
         ReverseHook::hook(oCheckRemoteDebuggerPresent, hkCheckRemoteDebuggerPresent, original_remotedebug_bytes);
+
+    oRtlAdjustPrivilege = (RtlAdjustPrivilege_t)GetProcAddress(GetModuleHandleA("ntdll.dll"), "RtlAdjustPrivilege");
+    if (oRtlAdjustPrivilege)
+        ReverseHook::hook(oRtlAdjustPrivilege, hkRtlAdjustPrivilege, original_rtladjustprivilege_bytes);
 }
 
 void UnhookSyscalls() {
@@ -77,4 +84,7 @@ void UnhookSyscalls() {
 
     if (oCheckRemoteDebuggerPresent)
         ReverseHook::unhook(oCheckRemoteDebuggerPresent, original_remotedebug_bytes);
+
+    if (oRtlAdjustPrivilege)
+        ReverseHook::unhook(oRtlAdjustPrivilege, original_rtladjustprivilege_bytes);
 }

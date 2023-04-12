@@ -1,10 +1,10 @@
 #pragma once
 
-typedef HINTERNET(WINAPI* InternetOpenUrlW_t)(HINTERNET hInternet, LPCWSTR lpszUrl, LPCWSTR lpszHeaders, DWORD dwHeadersLength, DWORD dwFlags, DWORD_PTR dwContext);
+typedef HINTERNET(NTAPI* InternetOpenUrlW_t)(HINTERNET hInternet, LPCWSTR lpszUrl, LPCWSTR lpszHeaders, DWORD dwHeadersLength, DWORD dwFlags, DWORD_PTR dwContext);
 
 InternetOpenUrlW_t oInternetOpenUrlW;
 
-HINTERNET WINAPI hkInternetOpenUrlW(HINTERNET hInternet, LPCWSTR lpszUrl, LPCWSTR lpszHeaders, DWORD dwHeadersLength, DWORD dwFlags, DWORD_PTR dwContext)
+HINTERNET NTAPI hkInternetOpenUrlW(HINTERNET hInternet, LPCWSTR lpszUrl, LPCWSTR lpszHeaders, DWORD dwHeadersLength, DWORD dwFlags, DWORD_PTR dwContext)
 {
     InterceptedCallInfo Temp;
 
