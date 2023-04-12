@@ -12,5 +12,14 @@ NTSTATUS NTAPI hkRtlAdjustPrivilege(ULONG Privilege, BOOLEAN Enable, BOOLEAN Cur
 		https://stackoverflow.com/questions/7034592/create-bsod-from-user-mode
 	*/
 
+	if (Privilege == (int)19 || Privilege == (int)20)
+	{
+		InterceptedCallInfo info;
+		info.functionName = "RtlAdjustPrivilege";
+		info.additionalInfo = "blocked";
+
+		interceptedCalls.push_back(info);
+	}
+
 	return STATUS_SUCCESS;
 }
