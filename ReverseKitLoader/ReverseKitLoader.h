@@ -5,7 +5,7 @@
 #include <tlhelp32.h>
 #include <iostream>
 
-class Injector
+class ReverseKitLoader
 {
 public:
 	static bool InjectDLL(DWORD processID, const char* relativeDllName)
@@ -35,7 +35,7 @@ public:
 		return true;
 	}
 
-	static DWORD GetTargetThreadIDFromProcName(const char* ProcName)
+	static DWORD GetProcessID(const char* ProcName)
 	{
 		HANDLE thSnapShot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 		if (thSnapShot == INVALID_HANDLE_VALUE)
