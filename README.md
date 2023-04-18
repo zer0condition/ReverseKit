@@ -55,7 +55,7 @@
   <img src="https://i.imgur.com/jgGg4tt.jpg" alt="tab">
 </div>
 
-<h2>Youtube Video</h2>
+<h2>Youtube</h2>
 <div>
   <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY"><img src="https://i.imgur.com/uGuwNif.png" alt="ReverseKit demo video" width="400"></a>
   <a href="https://www.youtube.com/watch?v=3lAU0GWPQAA"><img src="https://i.imgur.com/uGuwNif.png" alt="ReverseKit 2" width="400"></a>
