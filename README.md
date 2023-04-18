@@ -19,12 +19,13 @@
 <h2>Features</h2>
 <ul>
   <li>Imports information - along with DLL name, function name, and address.</li>
+  <li>Intercept all system calls via an instrumentation callback.</li>
   <li>Intercept all commands executed - system(), ShellExecuteEx(), etc.</li>
   <li>Intercept all thread creations - APIs like std::thread, CreateThread(), etc.</li>
   <li>Intercept URLs - APIs like UrlDownloadToFileA and InternetOpenUrlA, etc.</li>
   <li>Threads - lists thread ids along with cpu usage, allows you to suspend them with a button.</li>
   <li>Bypass common debugger checks - CheckRemoteDebugger() and IsDebuggerPresent().</li>
-  <li>Anti-BSOD for common usermode BSOD methods which abuse the RtlAdjustPrivilege.</li>
+  <li>Anti-BSOD for common usermode BSOD methods which abuse RtlAdjustPrivilege.</li>
   <li>Easy-to-use interface powered by ImGui.</li>
   <li>Hook library with a normal JMP hook and trampoline hook.</li>
 </ul>
@@ -47,7 +48,7 @@
 
 <h2>Todo</h2>
 
-- [ ] Fix instrumentation callback crashing for DLL.
+- [ ] Fix instrumentation callback crashing for DLL sometimes.
 
 <h2>Images</h2>
 <div>
@@ -57,4 +58,5 @@
 <h2>Youtube Video</h2>
 <div>
   <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY"><img src="https://i.imgur.com/uGuwNif.png" alt="ReverseKit demo video" width="400"></a>
+  <a href="https://www.youtube.com/watch?v=3lAU0GWPQAA"><img src="https://i.imgur.com/uGuwNif.png" alt="ReverseKit 2" width="400"></a>
 </div>
