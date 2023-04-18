@@ -14,9 +14,9 @@ int main()
 	printf("Waiting for process to start...");
 
 	while (!ProcessID)
-		ProcessID = Injector::GetTargetThreadIDFromProcName(ProcessName.c_str());
+		ProcessID = ReverseKitLoader::GetProcessID(ProcessName.c_str());
 
-	if (Injector::InjectDLL(ProcessID, "ReverseKit.dll"))
+	if (ReverseKitLoader::InjectDLL(ProcessID, "ReverseKit.dll"))
 	{
 		printf("Injected.\n");
 	}
