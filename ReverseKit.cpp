@@ -30,7 +30,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
         HookSyscalls();
         CreateThread(nullptr, 0, RetrievalThread, nullptr, 0, nullptr);
         CreateThread(nullptr, 0, RenderThread, nullptr, 0, nullptr);
-        //CreateThread(nullptr, 0, InstrumentationThread, nullptr, 0, nullptr); // Unstable, May crash.
+        CreateThread(nullptr, 0, InstrumentationThread, nullptr, 0, nullptr); // Unstable, May crash.
         break;
     case DLL_PROCESS_DETACH:
         UnhookSyscalls();
