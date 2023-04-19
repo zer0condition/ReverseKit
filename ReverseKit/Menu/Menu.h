@@ -8,6 +8,7 @@ void DrawInstrumentationInformation() {
         function_calls.clear();
     }
 
+    ImGui::Text("Press F1 to log system calls"); 
     ImGui::Columns(2, "instrumentation_columns", true);
 
     ImGui::Text("Function Name"); ImGui::NextColumn();
@@ -109,8 +110,79 @@ void DrawHookedFunctions()
 
 void RenderUI()
 {
-    DrawImports();
-    DrawHookedFunctions();
-    DrawThreadInformation();
-    DrawInstrumentationInformation();
+    static bool showThreads = false;
+    static bool showImports = true;
+    static bool showHookedFunctions = false;
+    static bool showInstrumentation = false;
+
+    RECT rect;
+    SystemParametersInfo(SPI_GETWORKAREA, 0, &rect, 0);
+    int screenWidth = rect.right - rect.left;
+    int screenHeight = rect.bottom - rect.top;
+    ImVec2 windowSize(390, 0);
+
+    ImGui::SetNextWindowPos(ImVec2((screenWidth / 2) - (windowSize.x / 2), 0));
+    ImGui::SetNextWindowSize(windowSize);
+
+    ImGui::Begin("[ReverseKit] Main Menu", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings);
+
+    ImVec4 activeButtonColor = ImVec4(0.2f, 0.6f, 1.0f, 1.0f);
+    ImVec4 inactiveButtonColor = ImVec4(0.3f, 0.3f, 0.3f, 1.0f);
+
+    if (showImports)
+        ImGui::PushStyleColor(ImGuiCol_Button, activeButtonColor);
+    else
+        ImGui::PushStyleColor(ImGuiCol_Button, inactiveButtonColor);
+
+    if (ImGui::Button("Imports"))
+        showImports = !showImports;
+
+    ImGui::PopStyleColor();
+
+    ImGui::SameLine();
+
+    if (showHookedFunctions)
+        ImGui::PushStyleColor(ImGuiCol_Button, activeButtonColor);
+    else
+        ImGui::PushStyleColor(ImGuiCol_Button, inactiveButtonColor);
+
+    if (ImGui::Button("Hooked Functions"))
+        showHookedFunctions = !showHookedFunctions;
+
+    ImGui::PopStyleColor();
+
+    ImGui::SameLine();
+
+    if (showThreads)
+        ImGui::PushStyleColor(ImGuiCol_Button, activeButtonColor);
+    else
+        ImGui::PushStyleColor(ImGuiCol_Button, inactiveButtonColor);
+
+    if (ImGui::Button("Threads"))
+        showThreads = !showThreads;
+
+    ImGui::PopStyleColor();
+
+    ImGui::SameLine();
+
+    if (showInstrumentation)
+        ImGui::PushStyleColor(ImGuiCol_Button, activeButtonColor);
+    else
+        ImGui::PushStyleColor(ImGuiCol_Button, inactiveButtonColor);
+
+    if (ImGui::Button("Instrumentation"))
+        showInstrumentation = !showInstrumentation;
+
+    ImGui::PopStyleColor();
+
+    ImGui::End();
+
+    if (showInstrumentation)
+        DrawInstrumentationInformation();
+    if (showThreads)
+        DrawThreadInformation();
+    if (showImports)
+        DrawImports();
+    if (showHookedFunctions)
+        DrawHookedFunctions();
 }

@@ -119,6 +119,7 @@ namespace Instrumentation
 
 void InstrumentationCallback(PCONTEXT ctx)
 {
+
     ULONG_PTR pTEB = (ULONG_PTR)NtCurrentTeb();
     if (!pTEB) {
         RtlRestoreContext(ctx, NULL);
@@ -134,52 +135,56 @@ void InstrumentationCallback(PCONTEXT ctx)
     {
         *((BOOLEAN*)pTEB + 0x1b8) = TRUE;
 
-        PDLL_INFO pDllInfo = Instrumentation::GetDllInfo(ctx->Rip);
-
-        if (pDllInfo)
+        if (GetAsyncKeyState(VK_F1))
         {
-            if (!pDllInfo->baseAddress) {
-                RtlRestoreContext(ctx, NULL);
-            }
+            PDLL_INFO pDllInfo = Instrumentation::GetDllInfo(ctx->Rip);
 
-            auto SymbolBuffer = malloc(sizeof(SYMBOL_INFO) + MAX_SYM_NAME);
-            if (!SymbolBuffer) {
-                RtlRestoreContext(ctx, NULL);
-            }
+            if (pDllInfo)
+            {
+                if (!pDllInfo->baseAddress) {
+                    RtlRestoreContext(ctx, NULL);
+                }
 
-            RtlSecureZeroMemory(SymbolBuffer, sizeof(SYMBOL_INFO) + MAX_SYM_NAME);
+                auto SymbolBuffer = malloc(sizeof(SYMBOL_INFO) + MAX_SYM_NAME);
+                if (!SymbolBuffer) {
+                    RtlRestoreContext(ctx, NULL);
+                }
 
-            PSYMBOL_INFO SymbolInfo = (PSYMBOL_INFO)SymbolBuffer;
-            SymbolInfo->SizeOfStruct = sizeof(SYMBOL_INFO);
-            SymbolInfo->MaxNameLen = MAX_SYM_NAME;
+                RtlSecureZeroMemory(SymbolBuffer, sizeof(SYMBOL_INFO) + MAX_SYM_NAME);
 
-            DWORD64 Displacement;
-            BOOLEAN SymbolLookupResult = SymFromAddr(GetCurrentProcess(), ctx->Rip, &Displacement, SymbolInfo);
+                PSYMBOL_INFO SymbolInfo = (PSYMBOL_INFO)SymbolBuffer;
+                SymbolInfo->SizeOfStruct = sizeof(SYMBOL_INFO);
+                SymbolInfo->MaxNameLen = MAX_SYM_NAME;
 
-            if (!SymbolLookupResult) {
+                DWORD64 Displacement;
+                BOOLEAN SymbolLookupResult = SymFromAddr(GetCurrentProcess(), ctx->Rip, &Displacement, SymbolInfo);
+
+                if (!SymbolLookupResult) {
+                    free(SymbolBuffer);
+                    RtlRestoreContext(ctx, NULL);
+                }
+
+                uintptr_t pFunction = Instrumentation::GetProcAddress((PVOID)pDllInfo->baseAddress, SymbolInfo->Name);
+                if (!pFunction) {
+                    free(SymbolBuffer);
+                    RtlRestoreContext(ctx, NULL);
+                }
+
+                ULONG_PTR ReturnAddress = *((ULONG_PTR*)(ctx->Rsp));
+                if (!ReturnAddress) {
+                    free(SymbolBuffer);
+                    RtlRestoreContext(ctx, NULL);
+                }
+
+                FunctionCallInfo call_info;
+                call_info.function_name = SymbolInfo->Name;
+                call_info.return_address = ReturnAddress;
+                function_calls.push_back(call_info);
+
                 free(SymbolBuffer);
-                RtlRestoreContext(ctx, NULL);
             }
-
-            uintptr_t pFunction = Instrumentation::GetProcAddress((PVOID)pDllInfo->baseAddress, SymbolInfo->Name);
-            if (!pFunction) {
-                free(SymbolBuffer);
-                RtlRestoreContext(ctx, NULL);
-            }
-
-            ULONG_PTR ReturnAddress = *((ULONG_PTR*)(ctx->Rsp));
-            if (!ReturnAddress) {
-                free(SymbolBuffer);
-                RtlRestoreContext(ctx, NULL);
-            }
-
-            FunctionCallInfo call_info;
-            call_info.function_name = SymbolInfo->Name;
-            call_info.return_address = ReturnAddress;
-            function_calls.push_back(call_info);
-
-            free(SymbolBuffer);
         }
+
         *((BOOLEAN*)pTEB + 0x1b8) = FALSE;
     }
     RtlRestoreContext(ctx, NULL);

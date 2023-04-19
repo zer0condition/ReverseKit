@@ -29,7 +29,7 @@
     <Filter Include="Window\Lib">
       <UniqueIdentifier>{fc189522-b025-4d5a-823b-8c6be8f3a548}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Instrumentation">
+    <Filter Include="Window\Instrumentation">
       <UniqueIdentifier>{191a3be8-1310-40fa-8b3c-2956f97e5769}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -128,7 +128,7 @@
       <Filter>ReverseLib</Filter>
     </ClInclude>
     <ClInclude Include="Instrumentation\InstrumentationCallback.h">
-      <Filter>Instrumentation</Filter>
+      <Filter>Window\Instrumentation</Filter>
     </ClInclude>
     <ClInclude Include="Hooks\RtlAdjustPrivilege.h">
       <Filter>Hooks\Syscalls</Filter>
@@ -141,7 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="Instrumentation\Thunk.asm">
-      <Filter>Instrumentation</Filter>
+      <Filter>Window\Instrumentation</Filter>
     </MASM>
   </ItemGroup>
 </Project>
