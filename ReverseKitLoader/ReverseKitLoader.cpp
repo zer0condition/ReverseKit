@@ -1,10 +1,18 @@
 #include "ReverseKitLoader.h"
 
 std::string ProcessName = "";
+std::string DLLName = "ReverseKit.dll";
 DWORD ProcessID = 0;
 
 int main()
 {
+	if (!PathFileExistsA(DLLName.c_str()))
+	{
+		printf("ReverseKit.dll not found\n");
+		system("pause");
+		return 0;
+	}
+
 	printf("Process Name: ");
 
 	std::cin >> ProcessName;
@@ -16,13 +24,9 @@ int main()
 	while (!ProcessID)
 		ProcessID = ReverseKitLoader::GetProcessID(ProcessName.c_str());
 
-	if (ReverseKitLoader::InjectDLL(ProcessID, "ReverseKit.dll"))
+	if (!ReverseKitLoader::InjectDLL(ProcessID, "ReverseKit.dll"))
 	{
-		printf("Injected.\n");
-	}
-	else
-	{
-		printf("Failed.\n");
+		printf("Failed to inject.\n");
 		system("pause");
 	}
 

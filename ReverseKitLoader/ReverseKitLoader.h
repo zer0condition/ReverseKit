@@ -5,6 +5,9 @@
 #include <tlhelp32.h>
 #include <iostream>
 
+#include <Shlwapi.h>
+#pragma comment( lib, "shlwapi.lib")
+
 class ReverseKitLoader
 {
 public:
