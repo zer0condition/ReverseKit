@@ -11,13 +11,13 @@
 class ReverseKitLoader
 {
 public:
-	static bool InjectDLL(DWORD processID, const char* relativeDllName)
+	static bool LoadDLL(DWORD ProcessID, const char* DLLName)
 	{
-		if (processID == 0)
+		if (ProcessID)
 			return false;
 
-		HANDLE Proc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processID);
-		if (Proc == 0)
+		HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, ProcessID);
+		if (!hProcess)
 		{
 			printf("OpenProcess() failed: %d", GetLastError());
 			return false;
@@ -25,16 +25,25 @@ public:
 
 		char DllName[MAX_PATH];
 
-		GetFullPathNameA(relativeDllName, MAX_PATH, DllName, NULL);
+		GetFullPathNameA(DLLName, MAX_PATH, DllName, NULL);
 
-		LPVOID LoadLib = (LPVOID)GetProcAddress(GetModuleHandleA("kernel32.dll"), "LoadLibraryA");
+		HMODULE hKernel32 = GetModuleHandleA("kernel32.dll");
 
-		LPVOID RemoteString = VirtualAllocEx(Proc, NULL, strlen(DllName), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+		if (hKernel32)
+		{
+			LPVOID LoadLib = (LPVOID)GetProcAddress(hKernel32, "LoadLibraryA");
 
-		WriteProcessMemory(Proc, RemoteString, DllName, strlen(DllName), NULL);
-		CreateRemoteThread(Proc, NULL, NULL, (LPTHREAD_START_ROUTINE)LoadLib, (LPVOID)RemoteString, NULL, NULL);
+			LPVOID RemoteString = VirtualAllocEx(hProcess, NULL, strlen(DllName), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
 
-		CloseHandle(Proc);
+			if (RemoteString) {
+				WriteProcessMemory(hProcess, RemoteString, DllName, strlen(DllName), NULL);
+				CreateRemoteThread(hProcess, NULL, NULL, (LPTHREAD_START_ROUTINE)LoadLib, (LPVOID)RemoteString, NULL, NULL);
+			}
+
+		}
+
+		CloseHandle(hProcess);
+
 		return true;
 	}
 
@@ -55,8 +64,6 @@ public:
 		{
 			if (!strcmp(pe.szExeFile, ProcName))
 			{
-				// names match
-				// close the handle and return the process id
 				CloseHandle(thSnapShot);
 				return pe.th32ProcessID;
 			}

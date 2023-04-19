@@ -24,7 +24,7 @@ int main()
 	while (!ProcessID)
 		ProcessID = ReverseKitLoader::GetProcessID(ProcessName.c_str());
 
-	if (!ReverseKitLoader::InjectDLL(ProcessID, DLLName.c_str()))
+	if (!ReverseKitLoader::LoadDLL(ProcessID, DLLName.c_str()))
 	{
 		printf("Failed to inject.\n");
 		system("pause");
