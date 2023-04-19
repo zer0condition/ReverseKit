@@ -13,13 +13,13 @@ class ReverseKitLoader
 public:
 	static bool LoadDLL(DWORD ProcessID, const char* DLLName)
 	{
-		if (ProcessID)
+		if (!ProcessID)
 			return false;
 
 		HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, ProcessID);
 		if (!hProcess)
 		{
-			printf("OpenProcess() failed: %d", GetLastError());
+			printf("Error: OpenProcess() failed: %d", GetLastError());
 			return false;
 		}
 
@@ -39,7 +39,6 @@ public:
 				WriteProcessMemory(hProcess, RemoteString, DllName, strlen(DllName), NULL);
 				CreateRemoteThread(hProcess, NULL, NULL, (LPTHREAD_START_ROUTINE)LoadLib, (LPVOID)RemoteString, NULL, NULL);
 			}
-
 		}
 
 		CloseHandle(hProcess);

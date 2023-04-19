@@ -8,7 +8,7 @@ int main()
 {
 	if (!PathFileExistsA(DLLName.c_str()))
 	{
-		printf("ReverseKit.dll not found\n");
+		printf("Error: ReverseKit.dll not found\n");
 		system("pause");
 		return 0;
 	}
@@ -19,14 +19,14 @@ int main()
 
 	system("cls");
 
-	printf("Waiting for process to start...");
+	printf("Waiting for process to start...\n");
 
 	while (!ProcessID)
 		ProcessID = ReverseKitLoader::GetProcessID(ProcessName.c_str());
 
 	if (!ReverseKitLoader::LoadDLL(ProcessID, DLLName.c_str()))
 	{
-		printf("Failed to inject.\n");
+		printf("Error: Failed to inject\n");
 		system("pause");
 	}
 
