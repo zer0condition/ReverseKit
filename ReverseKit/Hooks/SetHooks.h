@@ -17,6 +17,7 @@ unsigned char original_openurl_bytes[14];
 unsigned char original_isdebug_bytes[14];
 unsigned char original_remotedebug_bytes[14];
 unsigned char original_rtladjustprivilege_bytes[14];
+unsigned char original_regopenkey_bytes[14];
 
 struct InterceptedCallInfo {
     std::string functionName;
@@ -36,7 +37,10 @@ std::vector<InterceptedCallInfo> interceptedCalls;
 
 #include "RtlAdjustPrivilege.h"
 
-void HookSyscalls() {
+#include "RegEnumKeyExW.h"
+
+void HookSyscalls() 
+{
     oCreateProcessInternalW = (CreateProcessInternalW_t)GetProcAddress(GetModuleHandleA("kernelbase.dll"), "CreateProcessInternalW");
     if (oCreateProcessInternalW)
         ReverseHook::hook(oCreateProcessInternalW, hkCreateProcessInternalW, original_createprocess_bytes);
@@ -64,6 +68,10 @@ void HookSyscalls() {
     oRtlAdjustPrivilege = (RtlAdjustPrivilege_t)GetProcAddress(GetModuleHandleA("ntdll.dll"), "RtlAdjustPrivilege");
     if (oRtlAdjustPrivilege)
         ReverseHook::hook(oRtlAdjustPrivilege, hkRtlAdjustPrivilege, original_rtladjustprivilege_bytes);
+
+    oRegOpenKeyExW = (RegOpenKeyExW_t)GetProcAddress(GetModuleHandleA("advapi32.dll"), "RegOpenKeyExW");
+    if (oRegOpenKeyExW)
+        ReverseHook::hook(oRegOpenKeyExW, hkRegOpenKeyExW, original_regopenkey_bytes);
 }
 
 void UnhookSyscalls() {
@@ -87,4 +95,7 @@ void UnhookSyscalls() {
 
     if (oRtlAdjustPrivilege)
         ReverseHook::unhook(oRtlAdjustPrivilege, original_rtladjustprivilege_bytes);
+
+    if (oRegOpenKeyExW)
+        ReverseHook::unhook(oRegOpenKeyExW, original_regopenkey_bytes);
 }

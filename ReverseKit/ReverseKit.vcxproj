@@ -66,6 +66,7 @@
     <ClInclude Include="Hooks\InternetOpenUrlW.h" />
     <ClInclude Include="Hooks\IsDebuggerPresent.h" />
     <ClInclude Include="Hooks\NtCreateThreadEx.h" />
+    <ClInclude Include="Hooks\RegEnumKeyExW.h" />
     <ClInclude Include="Hooks\RtlAdjustPrivilege.h" />
     <ClInclude Include="Hooks\SetHooks.h" />
     <ClInclude Include="Hooks\URLDownloadToFileA.h" />

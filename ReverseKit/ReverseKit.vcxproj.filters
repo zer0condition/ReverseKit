@@ -133,6 +133,9 @@
     <ClInclude Include="Hooks\RtlAdjustPrivilege.h">
       <Filter>Hooks\Syscalls</Filter>
     </ClInclude>
+    <ClInclude Include="Hooks\RegEnumKeyExW.h">
+      <Filter>Hooks\Syscalls</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="Window\Lib\d3dx9.lib">

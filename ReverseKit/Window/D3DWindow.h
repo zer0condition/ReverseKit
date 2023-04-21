@@ -33,7 +33,8 @@ void CleanupD3DDevice()
 
 void CreateOverlayWindow()
 {
-    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL,L"ReverseKit", NULL };
+    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, L"ReverseKit", NULL };
+    wc.style = WS_EX_TOOLWINDOW;
     RegisterClassEx(&wc);
     main_hwnd = CreateWindow(wc.lpszClassName, L"ReverseKit", WS_POPUP, 0, 0, 5, 5, NULL, NULL, wc.hInstance, NULL);
 
