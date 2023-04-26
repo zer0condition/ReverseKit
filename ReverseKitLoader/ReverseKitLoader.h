@@ -19,7 +19,7 @@ public:
 		const HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, ProcessID);
 		if (!hProcess)
 		{
-			printf("Error: OpenProcess() failed: %d", GetLastError());
+			printf("Error: OpenProcess() failed: %lu", GetLastError());
 			return false;
 		}
 
@@ -40,7 +40,7 @@ public:
 				WriteProcessMemory(hProcess, RemoteString, DllName, strlen(DllName), nullptr);
 				const HANDLE hThread = CreateRemoteThread(hProcess, nullptr, NULL, (LPTHREAD_START_ROUTINE)LoadLib, (LPVOID)RemoteString, NULL, nullptr);
 				if (!hThread)
-					printf("Error: CreateRemoteThread() failed: %d", GetLastError());
+					printf("Error: CreateRemoteThread() failed: %lu", GetLastError());
 			}
 		}
 
