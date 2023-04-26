@@ -13,11 +13,11 @@ struct ThreadInfo {
 std::vector<ThreadInfo> threadInfo;
 
 void GetThreadInformation() {
-    DWORD processID = GetCurrentProcessId();
+	const DWORD processID = GetCurrentProcessId();
     
     std::vector<ThreadInfo> updatedThreadInfo;
 
-    HANDLE hThreadSnap = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
+	const HANDLE hThreadSnap = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
     if (hThreadSnap == INVALID_HANDLE_VALUE) {
         return;
     }
@@ -35,7 +35,7 @@ void GetThreadInformation() {
             continue;
         }
 
-        HANDLE hThread = OpenThread(THREAD_QUERY_INFORMATION, FALSE, te32.th32ThreadID);
+        const HANDLE hThread = OpenThread(THREAD_QUERY_INFORMATION, FALSE, te32.th32ThreadID);
         if (hThread == NULL) {
             continue;
         }
@@ -46,11 +46,11 @@ void GetThreadInformation() {
             continue;
         }
 
-        ULONGLONG kernelTimeDiff = (kernelTime.dwHighDateTime << 32) | kernelTime.dwLowDateTime;
-        ULONGLONG userTimeDiff = (userTime.dwHighDateTime << 32) | userTime.dwLowDateTime;
-        ULONGLONG elapsedTime = kernelTimeDiff + userTimeDiff;
-        ULONGLONG systemTime = GetTickCount64() * 10000;  // Convert from milliseconds to 100-nanosecond intervals
-        DWORD cpuUsage = static_cast<DWORD>((elapsedTime * 100) / systemTime);
+        const ULONGLONG kernelTimeDiff = (((ULONGLONG)kernelTime.dwHighDateTime) << 32) | kernelTime.dwLowDateTime;
+        const ULONGLONG userTimeDiff = (((ULONGLONG)userTime.dwHighDateTime) << 32) | userTime.dwLowDateTime;
+        const ULONGLONG elapsedTime = kernelTimeDiff + userTimeDiff;
+        const ULONGLONG systemTime = GetTickCount64() * 10000;  // Convert from milliseconds to 100-nanosecond intervals
+        const DWORD cpuUsage = static_cast<DWORD>((elapsedTime * 100) / systemTime);
 
         auto it = std::find_if(threadInfo.begin(), threadInfo.end(), [&](const ThreadInfo& info) {
             return info.threadId == te32.th32ThreadID;
