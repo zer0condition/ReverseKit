@@ -6,11 +6,11 @@ typedef NTSTATUS(NTAPI* NtCreateThreadEx_t)(OUT PHANDLE ThreadHandle, IN ACCESS_
     IN ULONG CreateFlags, IN SIZE_T StackZeroBits, IN SIZE_T SizeOfStackCommit,
     IN SIZE_T SizeOfStackReserve, OUT LPVOID BytesBuffer);
 
-NtCreateThreadEx_t oNtCreateThreadEx;
+inline NtCreateThreadEx_t oNtCreateThreadEx;
 
-NTSTATUS NTAPI hkNtCreateThreadEx(OUT PHANDLE ThreadHandle, IN ACCESS_MASK DesiredAccess,
-    IN POBJECT_ATTRIBUTES ObjectAttributes, IN HANDLE ProcessHandle,
-    IN LPTHREAD_START_ROUTINE StartRoutine, IN LPVOID Argument,
+inline NTSTATUS NTAPI hkNtCreateThreadEx(OUT PHANDLE ThreadHandle, IN ACCESS_MASK DesiredAccess,
+	IN POBJECT_ATTRIBUTES ObjectAttributes, IN HANDLE ProcessHandle,
+	IN LPTHREAD_START_ROUTINE StartRoutine, IN LPVOID Argument,
     IN ULONG CreateFlags, IN SIZE_T StackZeroBits, IN SIZE_T SizeOfStackCommit,
     IN SIZE_T SizeOfStackReserve, OUT LPVOID BytesBuffer)
 {
@@ -26,7 +26,7 @@ NTSTATUS NTAPI hkNtCreateThreadEx(OUT PHANDLE ThreadHandle, IN ACCESS_MASK Desir
 
     ReverseHook::unhook(oNtCreateThreadEx, original_createthread_bytes);
 
-    auto result = oNtCreateThreadEx(ThreadHandle, DesiredAccess, ObjectAttributes, ProcessHandle, StartRoutine, Argument, CreateFlags, StackZeroBits, SizeOfStackCommit, SizeOfStackReserve, BytesBuffer);
+    const auto result = oNtCreateThreadEx(ThreadHandle, DesiredAccess, ObjectAttributes, ProcessHandle, StartRoutine, Argument, CreateFlags, StackZeroBits, SizeOfStackCommit, SizeOfStackReserve, BytesBuffer);
 
     ReverseHook::hook(oNtCreateThreadEx, hkNtCreateThreadEx, original_createthread_bytes);
 

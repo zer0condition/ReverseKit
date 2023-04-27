@@ -10,9 +10,9 @@ struct ThreadInfo {
     }
 };
 
-std::vector<ThreadInfo> threadInfo;
+inline std::vector<ThreadInfo> threadInfo;
 
-void GetThreadInformation() {
+inline void GetThreadInformation() {
 	const DWORD processID = GetCurrentProcessId();
     
     std::vector<ThreadInfo> updatedThreadInfo;
@@ -36,7 +36,7 @@ void GetThreadInformation() {
         }
 
         const HANDLE hThread = OpenThread(THREAD_QUERY_INFORMATION, FALSE, te32.th32ThreadID);
-        if (hThread == NULL) {
+        if (hThread == nullptr) {
             continue;
         }
 

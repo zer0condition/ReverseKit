@@ -5,7 +5,7 @@ struct FunctionCallInfo {
     ULONG_PTR return_address;
 };
 
-std::vector<FunctionCallInfo> function_calls;
+inline std::vector<FunctionCallInfo> function_calls;
 
 extern "C" void InstrumentationCallbackThunk(void);
 extern "C" void InstrumentationCallback(PCONTEXT ctx);

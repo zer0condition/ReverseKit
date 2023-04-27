@@ -6,14 +6,14 @@ struct ImportInfo {
     void* functionAddress;
 };
 
-std::vector<ImportInfo> imports;
+inline std::vector<ImportInfo> imports;
 
-void GetImportsFromIAT()
+inline void GetImportsFromIAT()
 {
-    auto hModule = GetModuleHandle(NULL);
+	const auto hModule = GetModuleHandle(NULL);
 
-    PIMAGE_DOS_HEADER pDosHeader = (PIMAGE_DOS_HEADER)hModule;
-    PIMAGE_NT_HEADERS pNtHeaders = (PIMAGE_NT_HEADERS)((BYTE*)hModule + pDosHeader->e_lfanew);
+	const PIMAGE_DOS_HEADER pDosHeader = (PIMAGE_DOS_HEADER)hModule;
+	const PIMAGE_NT_HEADERS pNtHeaders = (PIMAGE_NT_HEADERS)((BYTE*)hModule + pDosHeader->e_lfanew);
     PIMAGE_IMPORT_DESCRIPTOR  pImportDesc = (PIMAGE_IMPORT_DESCRIPTOR)((BYTE*)hModule + pNtHeaders->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress);
 
     while (pImportDesc->Name)
@@ -32,7 +32,7 @@ void GetImportsFromIAT()
             }
             else
             {
-                PIMAGE_IMPORT_BY_NAME pImportByName = (PIMAGE_IMPORT_BY_NAME)((BYTE*)hModule + pThunkOrig->u1.AddressOfData);
+	            const PIMAGE_IMPORT_BY_NAME pImportByName = (PIMAGE_IMPORT_BY_NAME)((BYTE*)hModule + pThunkOrig->u1.AddressOfData);
                 info.functionName = (const char*)pImportByName->Name;
                 info.functionAddress = (void*)pThunk->u1.Function;
             }

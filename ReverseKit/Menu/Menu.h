@@ -1,6 +1,6 @@
 #pragma once
 
-void DrawInstrumentationInformation() {
+inline void DrawInstrumentationInformation() {
     ImGui::Begin("[ReverseKit] Instrumentation");
     ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Once);
 
@@ -23,7 +23,7 @@ void DrawInstrumentationInformation() {
     ImGui::End();
 }
 
-void DrawThreadInformation()
+inline void DrawThreadInformation()
 {
     ImGui::Begin("[ReverseKit] Active Threads");
     ImGui::SetWindowSize(ImVec2(600, 400), ImGuiCond_Once);
@@ -35,13 +35,13 @@ void DrawThreadInformation()
     ImGui::Text(""); ImGui::NextColumn();
     ImGui::Separator();
 
-    for (auto& info : threadInfo) {
+    for (const auto& info : threadInfo) {
         ImGui::Text("%lu", info.threadId); ImGui::NextColumn();
         ImGui::Text("%u%%", info.cpuUsage); ImGui::NextColumn();
 
         if (ImGui::Button("Suspend")) {
-            HANDLE hThread = OpenThread(THREAD_SUSPEND_RESUME, FALSE, info.threadId);
-            if (hThread != NULL) {
+	        const HANDLE hThread = OpenThread(THREAD_SUSPEND_RESUME, FALSE, info.threadId);
+            if (hThread != nullptr) {
                 SuspendThread(hThread);
                 CloseHandle(hThread);
             }
@@ -52,7 +52,7 @@ void DrawThreadInformation()
     ImGui::End();
 }
 
-void DrawImports()
+inline void DrawImports()
 {
     ImGui::Begin("[ReverseKit] Imports");
     ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Once);
@@ -74,7 +74,7 @@ void DrawImports()
 
 }
 
-void DrawHookedFunctions()
+inline void DrawHookedFunctions()
 {
     ImGui::Begin("[ReverseKit] Hooked Functions");
     ImGui::SetWindowSize(ImVec2(400, 600), ImGuiCond_Once);
@@ -115,19 +115,19 @@ void RenderUI()
     static bool showHookedFunctions = false;
     static bool showInstrumentation = false;
 
-    RECT rect;
+    RECT rect{};
     SystemParametersInfo(SPI_GETWORKAREA, 0, &rect, 0);
-    int screenWidth = rect.right - rect.left;
-    int screenHeight = rect.bottom - rect.top;
-    ImVec2 windowSize(390, 0);
+    const int screenWidth = rect.right - rect.left;
+    [[maybe_unused]] int screenHeight = rect.bottom - rect.top;
+    const ImVec2 windowSize(390, 0);
 
     ImGui::SetNextWindowPos(ImVec2((screenWidth / 2) - (windowSize.x / 2), 0));
     ImGui::SetNextWindowSize(windowSize);
 
     ImGui::Begin("[ReverseKit] Main Menu", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings);
 
-    ImVec4 activeButtonColor = ImVec4(0.2f, 0.6f, 1.0f, 1.0f);
-    ImVec4 inactiveButtonColor = ImVec4(0.3f, 0.3f, 0.3f, 1.0f);
+    const ImVec4 activeButtonColor = ImVec4(0.2f, 0.6f, 1.0f, 1.0f);
+    const ImVec4 inactiveButtonColor = ImVec4(0.3f, 0.3f, 0.3f, 1.0f);
 
     if (showImports)
         ImGui::PushStyleColor(ImGuiCol_Button, activeButtonColor);

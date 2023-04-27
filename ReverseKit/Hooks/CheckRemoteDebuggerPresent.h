@@ -2,9 +2,9 @@
 
 typedef BOOL(NTAPI* CheckRemoteDebuggerPresent_t)(HANDLE, PBOOL);
 
-CheckRemoteDebuggerPresent_t oCheckRemoteDebuggerPresent;
+inline CheckRemoteDebuggerPresent_t oCheckRemoteDebuggerPresent;
 
-BOOL NTAPI hkCheckRemoteDebuggerPresent(HANDLE hProcess, PBOOL pbDebuggerPresent)
+inline BOOL NTAPI hkCheckRemoteDebuggerPresent(HANDLE hProcess, PBOOL pbDebuggerPresent)
 {
     InterceptedCallInfo info;
     info.functionName = "CheckRemoteDebuggerPresent";
