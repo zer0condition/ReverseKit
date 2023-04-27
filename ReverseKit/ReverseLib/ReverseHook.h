@@ -21,7 +21,7 @@ namespace ReverseHook {
         VirtualProtect(original_function, 14, oldProtect, &oldProtect);
     }
 
-    void unhook(void* original_function, unsigned char* original_bytes) {
+    void unhook(void* original_function, const unsigned char* original_bytes) {
         DWORD oldProtect;
 
         VirtualProtect(original_function, 14, PAGE_EXECUTE_READWRITE, &oldProtect);
@@ -53,11 +53,11 @@ namespace ReverseHook {
         }
 
         void hook(void* original_function, void* hooked_function, unsigned char* original_bytes) {
-            DWORD oldProtect;
+            DWORD oldProtect = 0;
 
             void* trampoline = createTrampoline(original_function);
 
-            if (trampoline == NULL) {
+            if (trampoline == nullptr) {
                 return;
             }
 
@@ -80,8 +80,8 @@ namespace ReverseHook {
             VirtualProtect(original_function, 14, oldProtect, &oldProtect);
         }
 
-        void unhook(void* original_function, unsigned char* original_bytes) {
-            DWORD oldProtect;
+        void unhook(void* original_function, const unsigned char* original_bytes) {
+            DWORD oldProtect = 0;
 
             VirtualProtect(original_function, 14, PAGE_EXECUTE_READWRITE, &oldProtect);
 

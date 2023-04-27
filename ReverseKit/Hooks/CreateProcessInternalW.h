@@ -16,7 +16,7 @@ typedef BOOL(NTAPI* CreateProcessInternalW_t)(
 
 CreateProcessInternalW_t oCreateProcessInternalW;
 
-BOOL NTAPI hkCreateProcessInternalW(
+inline BOOL NTAPI hkCreateProcessInternalW(
     HANDLE hUserToken,
     LPCWSTR lpApplicationName,
     LPWSTR lpCommandLine,
@@ -33,13 +33,13 @@ BOOL NTAPI hkCreateProcessInternalW(
     InterceptedCallInfo Temp;
 
     Temp.functionName = "CreateProcessInternalW";
-    Temp.additionalInfo = ws2s(lpCommandLine).c_str();
+    Temp.additionalInfo = ws2s(lpCommandLine);
 
     interceptedCalls.push_back(Temp);
 
     ReverseHook::unhook(oCreateProcessInternalW, original_createprocess_bytes);
 
-    auto result = oCreateProcessInternalW(hUserToken, lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation, hNewToken);
+    const auto result = oCreateProcessInternalW(hUserToken, lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation, hNewToken);
 
     ReverseHook::hook(oCreateProcessInternalW, hkCreateProcessInternalW, original_createprocess_bytes);
 
