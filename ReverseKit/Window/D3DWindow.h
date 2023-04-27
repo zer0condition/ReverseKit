@@ -1,9 +1,9 @@
 #pragma once
 
-inline LPDIRECT3D9             g_pD3D = NULL;
-inline LPDIRECT3DDEVICE9       g_pd3dDevice = NULL;
+inline LPDIRECT3D9             g_pD3D = nullptr;
+inline LPDIRECT3DDEVICE9       g_pd3dDevice = nullptr;
 inline D3DPRESENT_PARAMETERS   g_d3dpp;
-inline HWND                    main_hwnd = NULL;
+inline HWND                    main_hwnd = nullptr;
 inline WNDCLASSEX              wc;
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);

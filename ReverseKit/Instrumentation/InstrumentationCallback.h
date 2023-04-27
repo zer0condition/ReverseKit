@@ -165,7 +165,7 @@ inline void InstrumentationCallback(PCONTEXT ctx)
 
                 const uintptr_t pFunction = Instrumentation::GetProcAddress((PVOID)pDllInfo->baseAddress, SymbolInfo->Name);
                 if (!pFunction) {
-                    free(SymbolBuffer);
+                    free(SymbolBuffer); //TODO: V586 https://pvs-studio.com/en/docs/warnings/v586/ The 'free' function is called twice for deallocation of the same memory space.
                     RtlRestoreContext(ctx, nullptr);
                 }
 
