@@ -1,7 +1,7 @@
 #pragma once
 
 namespace ReverseHook {
-    void hook(void* original_function, void* hooked_function, unsigned char* original_bytes) {
+	inline void hook(void* original_function, void* hooked_function, unsigned char* original_bytes) {
         DWORD oldProtect;
 
         VirtualProtect(original_function, 14, PAGE_EXECUTE_READWRITE, &oldProtect);
@@ -21,7 +21,7 @@ namespace ReverseHook {
         VirtualProtect(original_function, 14, oldProtect, &oldProtect);
     }
 
-    void unhook(void* original_function, const unsigned char* original_bytes) {
+	inline void unhook(void* original_function, const unsigned char* original_bytes) {
         DWORD oldProtect;
 
         VirtualProtect(original_function, 14, PAGE_EXECUTE_READWRITE, &oldProtect);
@@ -32,7 +32,7 @@ namespace ReverseHook {
     }
 
     namespace Trampoline {
-        void* createTrampoline(void* original_function) {
+	    inline void* createTrampoline(void* original_function) {
             void* trampoline = VirtualAlloc(NULL, 14 + sizeof(void*), MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
 
             if (trampoline == NULL) {
@@ -52,7 +52,7 @@ namespace ReverseHook {
             return trampoline;
         }
 
-        void hook(void* original_function, void* hooked_function, unsigned char* original_bytes) {
+	    inline void hook(void* original_function, void* hooked_function, unsigned char* original_bytes) {
             DWORD oldProtect = 0;
 
             void* trampoline = createTrampoline(original_function);
@@ -80,7 +80,7 @@ namespace ReverseHook {
             VirtualProtect(original_function, 14, oldProtect, &oldProtect);
         }
 
-        void unhook(void* original_function, const unsigned char* original_bytes) {
+	    inline void unhook(void* original_function, const unsigned char* original_bytes) {
             DWORD oldProtect = 0;
 
             VirtualProtect(original_function, 14, PAGE_EXECUTE_READWRITE, &oldProtect);
