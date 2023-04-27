@@ -6,25 +6,33 @@
 #include <locale>
 
 std::string ws2s(const std::wstring& wstr) {
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-    return converter.to_bytes(wstr);
+	const std::wstring_view wsv(wstr);
+    std::string result;
+    std::mbstate_t state = std::mbstate_t();
+    const wchar_t* pwcs = wsv.data();
+    const size_t len = std::wcsrtombs(nullptr, &pwcs, 0, &state);
+    if (len != static_cast<size_t>(-1)) {
+        result.resize(len);
+        std::wcsrtombs(result.data(), &pwcs, len, &state);
+    }
+    return result;
 }
 
-unsigned char original_createprocess_bytes[14];
-unsigned char original_createthread_bytes[14];
-unsigned char original_urlmoniker_bytes[14];
-unsigned char original_openurl_bytes[14];
-unsigned char original_isdebug_bytes[14];
-unsigned char original_remotedebug_bytes[14];
-unsigned char original_rtladjustprivilege_bytes[14];
-unsigned char original_regopenkey_bytes[14];
+inline unsigned char original_createprocess_bytes[14];
+inline unsigned char original_createthread_bytes[14];
+inline unsigned char original_urlmoniker_bytes[14];
+inline unsigned char original_openurl_bytes[14];
+inline unsigned char original_isdebug_bytes[14];
+inline unsigned char original_remotedebug_bytes[14];
+inline unsigned char original_rtladjustprivilege_bytes[14];
+inline unsigned char original_regopenkey_bytes[14];
 
 struct InterceptedCallInfo {
     std::string functionName;
     std::string additionalInfo;
 };
 
-std::vector<InterceptedCallInfo> interceptedCalls;
+inline std::vector<InterceptedCallInfo> interceptedCalls;
 
 #include "CreateProcessInternalW.h"
 #include "NtCreateThreadEx.h"
@@ -39,7 +47,7 @@ std::vector<InterceptedCallInfo> interceptedCalls;
 
 #include "RegEnumKeyExW.h"
 
-void HookSyscalls() 
+inline void HookSyscalls()
 {
     oCreateProcessInternalW = (CreateProcessInternalW_t)GetProcAddress(GetModuleHandleA("kernelbase.dll"), "CreateProcessInternalW");
     if (oCreateProcessInternalW)
@@ -74,7 +82,7 @@ void HookSyscalls()
         ReverseHook::hook(oRegOpenKeyExW, hkRegOpenKeyExW, original_regopenkey_bytes);
 }
 
-void UnhookSyscalls() {
+inline void UnhookSyscalls() {
     if (oCreateProcessInternalW)
         ReverseHook::unhook(oCreateProcessInternalW, original_createprocess_bytes);
 

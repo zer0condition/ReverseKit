@@ -4,7 +4,7 @@ typedef NTSTATUS(NTAPI* RtlAdjustPrivilege_t)(ULONG Privilege, BOOLEAN Enable, B
 
 RtlAdjustPrivilege_t oRtlAdjustPrivilege;
 
-NTSTATUS NTAPI hkRtlAdjustPrivilege(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled)
+inline NTSTATUS NTAPI hkRtlAdjustPrivilege(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled)
 {
 	/*
 		Anti-bsod for common methods like:
@@ -12,7 +12,8 @@ NTSTATUS NTAPI hkRtlAdjustPrivilege(ULONG Privilege, BOOLEAN Enable, BOOLEAN Cur
 		https://stackoverflow.com/questions/7034592/create-bsod-from-user-mode
 	*/
 
-	if (Privilege == (int)19 || Privilege == (int)20)
+	// https://www.pinvoke.net/default.aspx/ntdll/RtlAdjustPrivilege.html
+	if (Privilege == (int)19/*SeShutdownPrivilege*/ || Privilege == (int)20/*SeDebugPrivilege*/)
 	{
 		InterceptedCallInfo info;
 		info.functionName = "RtlAdjustPrivilege";

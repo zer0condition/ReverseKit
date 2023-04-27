@@ -1,6 +1,6 @@
 #pragma once
 
-DWORD WINAPI RenderThread(LPVOID lpParameter)
+inline DWORD WINAPI RenderThread([[maybe_unused]] LPVOID lpParameter)
 {
     CreateOverlayWindow();
 
@@ -19,7 +19,7 @@ DWORD WINAPI RenderThread(LPVOID lpParameter)
 
     while (msg.message != WM_QUIT) {
 
-        if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE)) {
+        if (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE)) {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
             continue;
@@ -32,7 +32,7 @@ DWORD WINAPI RenderThread(LPVOID lpParameter)
         RenderUI();
 
         ImGui::EndFrame();
-        g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
+        g_pd3dDevice->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
 
         if (g_pd3dDevice->BeginScene() >= 0)
         {
@@ -47,7 +47,7 @@ DWORD WINAPI RenderThread(LPVOID lpParameter)
             ImGui::RenderPlatformWindowsDefault();
         }
 
-        HRESULT result = g_pd3dDevice->Present(NULL, NULL, NULL, NULL);
+        const HRESULT result = g_pd3dDevice->Present(NULL, NULL, NULL, NULL);
         if (result == D3DERR_DEVICELOST && g_pd3dDevice->TestCooperativeLevel() == D3DERR_DEVICENOTRESET) {
             ResetD3DDevice();
         }

@@ -1,15 +1,15 @@
 #pragma once
 
-LPDIRECT3D9             g_pD3D = NULL;
-LPDIRECT3DDEVICE9       g_pd3dDevice = NULL;
-D3DPRESENT_PARAMETERS   g_d3dpp;
-HWND                    main_hwnd = NULL;
-WNDCLASSEX              wc;
+inline LPDIRECT3D9             g_pD3D = nullptr;
+inline LPDIRECT3DDEVICE9       g_pd3dDevice = nullptr;
+inline D3DPRESENT_PARAMETERS   g_d3dpp;
+inline HWND                    main_hwnd = nullptr;
+inline WNDCLASSEX              wc;
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
-bool CreateD3DDevice() {
-    if ((g_pD3D = Direct3DCreate9(D3D_SDK_VERSION)) == NULL)
+inline bool CreateD3DDevice() {
+    if ((g_pD3D = Direct3DCreate9(D3D_SDK_VERSION)) == nullptr)
         return false;
 
     ZeroMemory(&g_d3dpp, sizeof(g_d3dpp));
@@ -24,16 +24,17 @@ bool CreateD3DDevice() {
 
     return true;
 }
-void CleanupD3DDevice()
+
+inline void CleanupD3DDevice()
 {
-    if (g_pd3dDevice) { g_pd3dDevice->Release(); g_pd3dDevice = NULL; }
-    if (g_pD3D) { g_pD3D->Release(); g_pD3D = NULL; }
+    if (g_pd3dDevice) { g_pd3dDevice->Release(); g_pd3dDevice = nullptr; }
+    if (g_pD3D) { g_pD3D->Release(); g_pD3D = nullptr; }
     UnregisterClass(wc.lpszClassName, wc.hInstance);
 }
 
-void CreateOverlayWindow()
+inline void CreateOverlayWindow()
 {
-    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, L"ReverseKit", NULL };
+    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, L"ReverseKit", nullptr};
     wc.style = WS_EX_TOOLWINDOW;
     RegisterClassEx(&wc);
     main_hwnd = CreateWindow(wc.lpszClassName, L"ReverseKit", WS_POPUP, 0, 0, 5, 5, NULL, NULL, wc.hInstance, NULL);

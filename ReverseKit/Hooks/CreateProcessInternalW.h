@@ -14,7 +14,7 @@ typedef BOOL(NTAPI* CreateProcessInternalW_t)(
     LPPROCESS_INFORMATION lpProcessInformation,
     PHANDLE hNewToken);
 
-CreateProcessInternalW_t oCreateProcessInternalW;
+inline CreateProcessInternalW_t oCreateProcessInternalW;
 
 inline BOOL NTAPI hkCreateProcessInternalW(
     HANDLE hUserToken,
