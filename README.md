@@ -45,7 +45,14 @@
 <p>We welcome contributions from the community. If you find a bug or have an idea for a new feature, please open an issue or submit a pull request.</p>
 <h2>License</h2>
 <p>This project is licensed under the terms of the MIT license.</p>
-
+<h2>Sponsor</h1>
+<img src="https://websec.nl/public/images/logo_BlackText.png" height='150px' width='500px' alt="WebSec BV logo">
+<p>WebSec BV, a cybersecurity company based in Amsterdam, is recognized for their dedication to helping businesses and individuals protect themselves against online threats. As a valued sponsor, they have contributed significantly to the promotion of cybersecurity and the creation of a safer online world.</p>
+<p>WebSec's team of professionals is committed to staying ahead of the latest threats and developing cutting-edge solutions to keep their clients protected. Their passion for cybersecurity education has made them a trusted and reliable partner in the industry.</p>
+<p>Through their sponsorship and support, WebSec has demonstrated their commitment to promoting cybersecurity awareness and helping people stay safe online. Their contributions are greatly appreciated and have made a significant impact on the work being done in this field, such as making this project 'ReverseKit' a reality.</p>
+<p>Overall, WebSec BV is a trusted and respected leader in the fight against cybercrime, and their sponsorship and support have been instrumental in promoting a safer online world. They are a valued partner and their contributions to this important work are truly appreciated.</p>
+<p>Website: <a href="https://websec.nl/en/">https://websec.nl/en/</a></p>
+<p>Blog: </a href="https://websec.nl/blog/">https://websec.nl/blog/</a></p>
 <h2>Todo</h2>
 
 - [ ] Fix instrumentation callback crashing for DLL sometimes.
