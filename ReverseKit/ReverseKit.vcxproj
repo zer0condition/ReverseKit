@@ -52,6 +52,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Hooks\SetHooks.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
@@ -59,18 +60,18 @@
     <ClCompile Include="ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Imports\Imports.cpp" />
+    <ClCompile Include="Instrumentation\InstrumentationCallback.cpp" />
+    <ClCompile Include="Menu\Menu.cpp" />
     <ClCompile Include="ReverseKit.cpp" />
+    <ClCompile Include="ReverseLib\ReverseHook.cpp" />
+    <ClCompile Include="Threads\Threads.cpp" />
+    <ClCompile Include="Window\D3DWindow.cpp" />
+    <ClCompile Include="Window\ImGuiSetup.cpp" />
+    <ClCompile Include="Window\Render.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Hooks\CheckRemoteDebuggerPresent.h" />
-    <ClInclude Include="Hooks\CreateProcessInternalW.h" />
-    <ClInclude Include="Hooks\InternetOpenUrlW.h" />
-    <ClInclude Include="Hooks\IsDebuggerPresent.h" />
-    <ClInclude Include="Hooks\NtCreateThreadEx.h" />
-    <ClInclude Include="Hooks\RegEnumKeyExW.h" />
-    <ClInclude Include="Hooks\RtlAdjustPrivilege.h" />
     <ClInclude Include="Hooks\SetHooks.h" />
-    <ClInclude Include="Hooks\URLDownloadToFileA.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
     <ClInclude Include="ImGui\imgui_impl_dx9.h" />

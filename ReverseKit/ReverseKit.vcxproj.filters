@@ -56,6 +56,15 @@
       <Filter>ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ReverseKit.cpp" />
+    <ClCompile Include="Hooks\SetHooks.cpp" />
+    <ClCompile Include="ReverseLib\ReverseHook.cpp" />
+    <ClCompile Include="Threads\Threads.cpp" />
+    <ClCompile Include="Window\Render.cpp" />
+    <ClCompile Include="Window\ImGuiSetup.cpp" />
+    <ClCompile Include="Menu\Menu.cpp" />
+    <ClCompile Include="Imports\Imports.cpp" />
+    <ClCompile Include="Instrumentation\InstrumentationCallback.cpp" />
+    <ClCompile Include="Window\D3DWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ReverseLib\ReverseHook.h">
@@ -97,24 +106,6 @@
     <ClInclude Include="Hooks\SetHooks.h">
       <Filter>Hooks</Filter>
     </ClInclude>
-    <ClInclude Include="Hooks\URLDownloadToFileA.h">
-      <Filter>Hooks\Syscalls</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\NtCreateThreadEx.h">
-      <Filter>Hooks\Syscalls</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\IsDebuggerPresent.h">
-      <Filter>Hooks\Syscalls</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\InternetOpenUrlW.h">
-      <Filter>Hooks\Syscalls</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\CreateProcessInternalW.h">
-      <Filter>Hooks\Syscalls</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\CheckRemoteDebuggerPresent.h">
-      <Filter>Hooks\Syscalls</Filter>
-    </ClInclude>
     <ClInclude Include="Menu\Menu.h">
       <Filter>Menu</Filter>
     </ClInclude>
@@ -129,12 +120,6 @@
     </ClInclude>
     <ClInclude Include="Instrumentation\InstrumentationCallback.h">
       <Filter>Window\Instrumentation</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\RtlAdjustPrivilege.h">
-      <Filter>Hooks\Syscalls</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks\RegEnumKeyExW.h">
-      <Filter>Hooks\Syscalls</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
