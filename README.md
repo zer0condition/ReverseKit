@@ -56,7 +56,7 @@
  <p>Overall, WebSec BV is a trusted and respected leader in the fight against cybercrime, and their sponsorship and support have been instrumental in promoting a safer online world. They are a valued partner and their contributions to this important work are truly appreciated.</p>
 <p>
 Website: <a href="https://websec.nl/en/">websec.nl</a> <br>
-Blog: <a href="https://websec.nl/blog/">websec.nl/blog/</a>
+Blog: <a href="https://websec.nl/blog/">websec.nl/blog</a>
 </p>
 
 
