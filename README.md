@@ -62,7 +62,7 @@ Blog: <a href="https://websec.nl/blog/">websec.nl/blog</a>
 
 <h2>Images</h2>
 <div>
-  <img src="https://i.imgur.com/PQhZDAp.jpg" alt="tab">
+  <img src="https://i.imgur.com/jgGg4tt.jpg" alt="tab">
 </div>
 
 <h2>Youtube</h2>
