@@ -50,7 +50,7 @@
  <h2>Sponsor</h1>
  
  <img src="https://i.imgur.com/KEOydE7.png" alt="WebSec BV logo">
- <p>WebSec BV, a cybersecurity company based in Amsterdam, is recognized for their dedication to helping businesses and individuals protect themselves against online threats. As a valued sponsor, they have contributed significantly to the promotion of cybersecurity and the creation of a safer online world.</p>
+ <p><b>WebSec BV</b>, a cybersecurity company based in Amsterdam, is recognized for their dedication to helping businesses and individuals protect themselves against online threats. As a valued sponsor, they have contributed significantly to the promotion of cybersecurity and the creation of a safer online world.</p>
  <p>WebSec's team of professionals is committed to staying ahead of the latest threats and developing cutting-edge solutions to keep their clients protected. Their passion for cybersecurity education has made them a trusted and reliable partner in the industry.</p>
  <p>Through their sponsorship and support, WebSec has demonstrated their commitment to promoting cybersecurity awareness and helping people stay safe online. Their contributions are greatly appreciated and have made a significant impact on the work being done in this field, such as making this project 'ReverseKit' a reality.</p>
  <p>Overall, WebSec BV is a trusted and respected leader in the fight against cybercrime, and their sponsorship and support have been instrumental in promoting a safer online world. They are a valued partner and their contributions to this important work are truly appreciated.</p>
@@ -67,6 +67,6 @@ Blog: <a href="https://websec.nl/blog/">websec.nl/blog</a>
 
 <h2>Youtube</h2>
 <div>
-  <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY"><img src="https://i.imgur.com/uGuwNif.png" alt="ReverseKit demo" width="400"></a>
-  <a href="https://www.youtube.com/watch?v=3lAU0GWPQAA"><img src="https://i.imgur.com/uGuwNif.png" alt="ReverseKit 2" width="400"></a>
+  <a href="https://www.youtube.com/watch?v=3P8ck5U_OXY">ReverseKit YouTube Demo 1</a> <br>
+  <a href="https://www.youtube.com/watch?v=3lAU0GWPQAA">ReverseKit YouTube Demo 2</a> <br>
 </div>
