@@ -55,8 +55,8 @@
  <p>Through their sponsorship and support, WebSec has demonstrated their commitment to promoting cybersecurity awareness and helping people stay safe online. Their contributions are greatly appreciated and have made a significant impact on the work being done in this field, such as making this project 'ReverseKit' a reality.</p>
  <p>Overall, WebSec BV is a trusted and respected leader in the fight against cybercrime, and their sponsorship and support have been instrumental in promoting a safer online world. They are a valued partner and their contributions to this important work are truly appreciated.</p>
 <p>
-Website: <a href="https://websec.nl/en/">websec.nl/en</a> <br>
-Blog: </a href="https://websec.nl/blog/">websec.nl/blog/</a>
+Website: <a href="https://websec.nl/en/">websec.nl</a> <br>
+Blog: <a href="https://websec.nl/blog/">websec.nl/blog/</a>
 </p>
 
 
