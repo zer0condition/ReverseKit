@@ -43,10 +43,13 @@
 </ul>
 <h2>Contributing</h2>
 <p>We welcome contributions from the community. If you find a bug or have an idea for a new feature, please open an issue or submit a pull request.</p>
+
  <h2>License</h2>
  <p>This project is licensed under the terms of the MIT license.</p>
+ 
  <h2>Sponsor</h1>
- <img src="https://websec.nl/public/images/logo_BlackText.png" height='150px' width='500px' alt="WebSec BV logo">
+ 
+ <img src="https://i.imgur.com/KEOydE7.png" alt="WebSec BV logo">
  <p>WebSec BV, a cybersecurity company based in Amsterdam, is recognized for their dedication to helping businesses and individuals protect themselves against online threats. As a valued sponsor, they have contributed significantly to the promotion of cybersecurity and the creation of a safer online world.</p>
  <p>WebSec's team of professionals is committed to staying ahead of the latest threats and developing cutting-edge solutions to keep their clients protected. Their passion for cybersecurity education has made them a trusted and reliable partner in the industry.</p>
  <p>Through their sponsorship and support, WebSec has demonstrated their commitment to promoting cybersecurity awareness and helping people stay safe online. Their contributions are greatly appreciated and have made a significant impact on the work being done in this field, such as making this project 'ReverseKit' a reality.</p>
