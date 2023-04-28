@@ -30,7 +30,7 @@
   <li>Hook library with a normal JMP hook and trampoline hook.</li>
 </ul>
 <h2>Getting Started</h2>
-<p>To get started with ReverseKit, you can clone this repository and build the project. Once the build is complete, you can inject the tool and start using it to analyze binaries.</p>
+<p>To get started with ReverseKit, you can clone this repository and build the project. Once the build is complete, you can inject the tool using ReverseKit Loader, or any prefered injector and start using it to analyze binaries.</p>
 <h2>Usage</h2>
 <p>ReverseKit provides a user-friendly interface that enables you to easily intercept, analyze, and manipulate code and data during runtime. With the wide range of features and functionalities, you can:</p>
 <ul>
