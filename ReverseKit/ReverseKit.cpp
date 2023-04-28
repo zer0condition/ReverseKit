@@ -8,7 +8,8 @@
 #include "Menu/Menu.h"
 #include "Window/Render.h"
 
-DWORD WINAPI RetrievalThread(LPVOID lpParameter) {
+DWORD WINAPI RetrievalThread(LPVOID lpParameter)
+{
     while (true) {
         GetImportsFromIAT();
         GetThreadInformation();
@@ -17,7 +18,8 @@ DWORD WINAPI RetrievalThread(LPVOID lpParameter) {
 }
 
 /* Unstable. */
-DWORD WINAPI InstrumentationThread(LPVOID lpParameter) {
+DWORD WINAPI InstrumentationThread(LPVOID lpParameter)
+{
     return Instrumentation::Initialize();
 }
 
@@ -41,11 +43,11 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
     {
     case DLL_PROCESS_ATTACH:
         SetConsoleTitleA("ReverseKit Attached");
-        HookSyscalls();
+        SetHooks::HookSyscalls();
         InitializeReverseKit();
         break;
     case DLL_PROCESS_DETACH:
-        UnhookSyscalls();
+        SetHooks::UnhookSyscalls();
         break;
 	default: 
         return TRUE;
