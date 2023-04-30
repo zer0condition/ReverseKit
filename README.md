@@ -1,6 +1,3 @@
-<head>
-<meta name="image" property="og:image" content="https://raw.githubusercontent.com/zer0condition/ReverseKit/master/ReverseKit.png">
-</head>
 <h1 align="left">
   ReverseKit - Dynamic Reverse Engineering Toolkit<br>
   <img src="https://raw.githubusercontent.com/zer0condition/ReverseKit/master/ReverseKit.png" height=250px alt="ReverseKit Logo" align="right">
