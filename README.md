@@ -1,6 +1,6 @@
 <h1 align="left">
   ReverseKit - Dynamic Reverse Engineering Toolkit<br>
-  <img src="https://i.imgur.com/q92np0W.png" alt="ReverseKit Logo" align="right">
+  <img src="https://raw.githubusercontent.com/zer0condition/ReverseKit/master/ReverseKit.png" width=160px height=160px alt="ReverseKit Logo" align="right">
 </h1>
 <p align="left">
   <img src="https://img.shields.io/github/license/zer0condition/reversekit?style=flat-square" alt="License">
