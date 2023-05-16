@@ -29,6 +29,5 @@ int main()
 		printf("Error: Failed to inject\n");
 		system("pause");
 	}
-
 	return 0;
 }

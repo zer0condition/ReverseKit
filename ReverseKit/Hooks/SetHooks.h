@@ -27,6 +27,7 @@ inline unsigned char original_isdebug_bytes[14];
 inline unsigned char original_remotedebug_bytes[14];
 inline unsigned char original_rtladjustprivilege_bytes[14];
 inline unsigned char original_regopenkey_bytes[14];
+inline unsigned char original_writeprocessmemory_bytes[14];
 
 struct InterceptedCallInfo {
 	std::string functionName;
@@ -73,6 +74,8 @@ namespace SetHooks
 	typedef HRESULT(NTAPI* URLDownloadToFileA_t)(LPUNKNOWN, LPCSTR, LPCSTR, DWORD,
 		LPBINDSTATUSCALLBACK);
 
+	typedef BOOL(NTAPI* WriteProcessMemory_t)(HANDLE, LPVOID, LPCVOID, SIZE_T, SIZE_T*);
+
 	inline URLDownloadToFileA_t oURLDownloadToFileA;
 	inline RtlAdjustPrivilege_t oRtlAdjustPrivilege;
 	inline RegOpenKeyExW_t oRegOpenKeyExW;
@@ -81,6 +84,7 @@ namespace SetHooks
 	inline InternetOpenUrlW_t oInternetOpenUrlW;
 	inline CheckRemoteDebuggerPresent_t oCheckRemoteDebuggerPresent;
 	inline CreateProcessInternalW_t oCreateProcessInternalW;
+	inline WriteProcessMemory_t oWriteProcessMemory;
 
 	BOOL NTAPI hkCreateProcessInternalW(
 		HANDLE hUserToken,
@@ -117,6 +121,9 @@ namespace SetHooks
 
 	HRESULT NTAPI hkURLDownloadToFileA(LPUNKNOWN pCaller, LPCSTR szURL,
 		LPCSTR szFileName, DWORD dwReserved, LPBINDSTATUSCALLBACK lpfnCB);
+
+	BOOL hkWriteProcessMemory(HANDLE hProcess, LPVOID lpBaseAddress, LPCVOID lpBuffer, SIZE_T nSize,
+		SIZE_T *lpNumberOfBytesWritten);
 
 	void HookSyscalls();
 	void UnhookSyscalls();

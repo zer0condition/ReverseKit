@@ -1,5 +1,7 @@
 #include "SetHooks.h"
 
+#include <sstream>
+
 void SetHooks::HookSyscalls()
 {
 	oCreateProcessInternalW = (CreateProcessInternalW_t)GetProcAddress(GetModuleHandleA("kernelbase.dll"), "CreateProcessInternalW");
@@ -33,6 +35,10 @@ void SetHooks::HookSyscalls()
 	oRegOpenKeyExW = (RegOpenKeyExW_t)GetProcAddress(GetModuleHandleA("advapi32.dll"), "RegOpenKeyExW");
 	if (oRegOpenKeyExW)
 		ReverseHook::hook(oRegOpenKeyExW, hkRegOpenKeyExW, original_regopenkey_bytes);
+
+	oWriteProcessMemory = (WriteProcessMemory_t)GetProcAddress(GetModuleHandleA("kernel32.dll"), "WriteProcessMemory");
+	if (oWriteProcessMemory)
+		ReverseHook::hook(oWriteProcessMemory, hkWriteProcessMemory, original_writeprocessmemory_bytes);
 }
 
 void SetHooks::UnhookSyscalls()
@@ -60,6 +66,9 @@ void SetHooks::UnhookSyscalls()
 
 	if (oRegOpenKeyExW)
 		ReverseHook::unhook(oRegOpenKeyExW, original_regopenkey_bytes);
+
+	if (oWriteProcessMemory)
+		ReverseHook::unhook(oWriteProcessMemory, original_writeprocessmemory_bytes);
 }
 
 BOOL NTAPI SetHooks::hkCheckRemoteDebuggerPresent(HANDLE hProcess, PBOOL pbDebuggerPresent)
@@ -208,8 +217,11 @@ HRESULT NTAPI SetHooks::hkURLDownloadToFileA(LPUNKNOWN pCaller, LPCSTR szURL,
 {
 	InterceptedCallInfo Temp;
 
+	std::stringstream ss;
+	ss << "URL: " << szURL << " FileName: " << szFileName;
+
 	Temp.functionName = "URLDownloadToFileA";
-	Temp.additionalInfo = szURL;
+	Temp.additionalInfo = ss.str();
 
 	interceptedCalls.push_back(Temp);
 
@@ -218,6 +230,29 @@ HRESULT NTAPI SetHooks::hkURLDownloadToFileA(LPUNKNOWN pCaller, LPCSTR szURL,
 	const auto result = oURLDownloadToFileA(pCaller, szURL, szFileName, dwReserved, lpfnCB);
 
 	ReverseHook::hook(oURLDownloadToFileA, hkURLDownloadToFileA, original_urlmoniker_bytes);
+
+	return result;
+}
+
+BOOL SetHooks::hkWriteProcessMemory(HANDLE hProcess, LPVOID lpBaseAddress, LPCVOID lpBuffer, SIZE_T nSize,
+		SIZE_T *lpNumberOfBytesWritten)
+{
+	InterceptedCallInfo Temp;
+
+	std::stringstream ss;
+	ss << "Base Address: " << std::hex << lpBaseAddress << " Buffer: " << lpBuffer << " Size: " << nSize;
+
+	Temp.functionName = "WriteProcessMemory";
+	Temp.additionalInfo = ss.str();
+
+	interceptedCalls.push_back(Temp);
+
+	ReverseHook::unhook(oWriteProcessMemory, original_writeprocessmemory_bytes);
+
+	const auto result = oWriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize,
+		lpNumberOfBytesWritten);
+
+	ReverseHook::hook(oWriteProcessMemory, hkWriteProcessMemory, original_writeprocessmemory_bytes);
 
 	return result;
 }

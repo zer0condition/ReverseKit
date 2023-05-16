@@ -29,7 +29,7 @@ void GetImportsFromIAT()
 	            const PIMAGE_IMPORT_BY_NAME pImportByName
             	= (PIMAGE_IMPORT_BY_NAME)((BYTE*)hModule + pThunkOrig->u1.AddressOfData);
 
-                info.functionName = (const char*)pImportByName->Name;
+                info.functionName = pImportByName->Name;
                 info.functionAddress = (void*)pThunk->u1.Function;
             }
 

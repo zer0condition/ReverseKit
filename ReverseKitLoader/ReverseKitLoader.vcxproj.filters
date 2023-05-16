@@ -19,5 +19,8 @@
     <ClInclude Include="ReverseKitLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Injection\GetProcAddressR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
