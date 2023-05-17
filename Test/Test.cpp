@@ -10,8 +10,8 @@ void TestThread()
 
 	printf("Test: %f\n", m_flTest);
 
-	system("echo system");
-	_wsystem(L"echo _wsystem");
+	auto _Unload = GetProcAddress(LoadLibraryA("sysmondrv"), "Unload");
+	auto _GetModuleFileNameA = GetProcAddress(GetModuleHandleA("kernel32.dll"), "GetModuleFileNameA");
 }
 
 int main()

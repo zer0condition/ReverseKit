@@ -1,6 +1,7 @@
 #include "SetHooks.h"
 
 #include <sstream>
+#include <Psapi.h>
 
 void SetHooks::HookSyscalls()
 {
@@ -39,6 +40,10 @@ void SetHooks::HookSyscalls()
 	oWriteProcessMemory = (WriteProcessMemory_t)GetProcAddress(GetModuleHandleA("kernel32.dll"), "WriteProcessMemory");
 	if (oWriteProcessMemory)
 		ReverseHook::hook(oWriteProcessMemory, hkWriteProcessMemory, original_writeprocessmemory_bytes);
+
+	oGetProcAddress = (GetProcAddress_t)GetProcAddress(GetModuleHandleA("kernel32.dll"), "GetProcAddress");
+	if (oGetProcAddress)
+		ReverseHook::hook(oGetProcAddress, hkGetProcAddress, original_getprocaddress_bytes);
 }
 
 void SetHooks::UnhookSyscalls()
@@ -69,6 +74,9 @@ void SetHooks::UnhookSyscalls()
 
 	if (oWriteProcessMemory)
 		ReverseHook::unhook(oWriteProcessMemory, original_writeprocessmemory_bytes);
+
+	if (oGetProcAddress)
+		ReverseHook::unhook(oGetProcAddress, original_getprocaddress_bytes);
 }
 
 BOOL NTAPI SetHooks::hkCheckRemoteDebuggerPresent(HANDLE hProcess, PBOOL pbDebuggerPresent)
@@ -102,6 +110,15 @@ BOOL NTAPI SetHooks::hkCreateProcessInternalW(
 
 	Temp.functionName = "CreateProcessInternalW";
 	Temp.additionalInfo = ws2s(lpCommandLine);
+
+	// Prevent program from unloading sysmon driver
+	if (_wcsicmp(lpCommandLine, L"/c unload SysmonDrv")
+		|| _wcsicmp(lpCommandLine, L"fltMC.exe unload SysmonDrv"))
+	{
+		Temp.additionalInfo += " (blocked)";
+		interceptedCalls.push_back(Temp);
+		return FALSE;
+	}
 
 	interceptedCalls.push_back(Temp);
 
@@ -257,35 +274,30 @@ BOOL SetHooks::hkWriteProcessMemory(HANDLE hProcess, LPVOID lpBaseAddress, LPCVO
 	return result;
 }
 
-int SetHooks::hkSystem(const char* command)
+FARPROC SetHooks::hkGetProcAddress(HMODULE hModule, LPCSTR lpProcName)
 {
 	InterceptedCallInfo Temp;
 
-	Temp.functionName = "system";
-	Temp.additionalInfo = command;
+	std::stringstream ss;
+
+	Temp.functionName = "GetProcAddress";
+
+	ss << "Module: " << std::hex << hModule << " ProcName: " << lpProcName;
+
+	Temp.additionalInfo = ss.str();
+	
+	ReverseHook::unhook(oGetProcAddress, original_getprocaddress_bytes);
+
+	auto result = oGetProcAddress(hModule, lpProcName);
+	if (result == oGetProcAddress(LoadLibraryA("sysmondrv"), "Unload"))
+	{
+		Temp.additionalInfo.append(" (blocked)");
+		result = nullptr;
+	}
 
 	interceptedCalls.push_back(Temp);
 
-	ReverseHook::unhook(oSystem, original_system_bytes);
-
-	const auto result = oSystem(command);
-
-	ReverseHook::hook(oSystem, hkSystem, original_system_bytes);
+	ReverseHook::hook(oGetProcAddress, hkGetProcAddress, original_getprocaddress_bytes);
 
 	return result;
-}
-int SetHooks::hkWSystem(const wchar_t* command)
-{
-	InterceptedCallInfo Temp;
-
-	Temp.functionName = "_wsystem";
-	Temp.additionalInfo = ws2s(command);
-
-	interceptedCalls.push_back(Temp);
-
-	ReverseHook::unhook(oWSystem, original_wsystem_bytes);
-
-	const auto result = oWSystem(command);
-
-	ReverseHook::hook(oWSystem, hkSystem, original_wsystem_bytes);
 }
