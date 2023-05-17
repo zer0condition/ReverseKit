@@ -9,6 +9,9 @@ void TestThread()
 	WriteProcessMemory(GetCurrentProcess(), &m_flTest, &flBuffer, sizeof(float), nullptr);
 
 	printf("Test: %f\n", m_flTest);
+
+	system("echo system");
+	_wsystem(L"echo _wsystem");
 }
 
 int main()

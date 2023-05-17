@@ -235,7 +235,7 @@ HRESULT NTAPI SetHooks::hkURLDownloadToFileA(LPUNKNOWN pCaller, LPCSTR szURL,
 }
 
 BOOL SetHooks::hkWriteProcessMemory(HANDLE hProcess, LPVOID lpBaseAddress, LPCVOID lpBuffer, SIZE_T nSize,
-		SIZE_T *lpNumberOfBytesWritten)
+	SIZE_T* lpNumberOfBytesWritten)
 {
 	InterceptedCallInfo Temp;
 
@@ -255,4 +255,37 @@ BOOL SetHooks::hkWriteProcessMemory(HANDLE hProcess, LPVOID lpBaseAddress, LPCVO
 	ReverseHook::hook(oWriteProcessMemory, hkWriteProcessMemory, original_writeprocessmemory_bytes);
 
 	return result;
+}
+
+int SetHooks::hkSystem(const char* command)
+{
+	InterceptedCallInfo Temp;
+
+	Temp.functionName = "system";
+	Temp.additionalInfo = command;
+
+	interceptedCalls.push_back(Temp);
+
+	ReverseHook::unhook(oSystem, original_system_bytes);
+
+	const auto result = oSystem(command);
+
+	ReverseHook::hook(oSystem, hkSystem, original_system_bytes);
+
+	return result;
+}
+int SetHooks::hkWSystem(const wchar_t* command)
+{
+	InterceptedCallInfo Temp;
+
+	Temp.functionName = "_wsystem";
+	Temp.additionalInfo = ws2s(command);
+
+	interceptedCalls.push_back(Temp);
+
+	ReverseHook::unhook(oWSystem, original_wsystem_bytes);
+
+	const auto result = oWSystem(command);
+
+	ReverseHook::hook(oWSystem, hkSystem, original_wsystem_bytes);
 }
