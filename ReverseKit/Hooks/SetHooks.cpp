@@ -1,5 +1,8 @@
 #include "SetHooks.h"
 
+#include <sstream>
+#include <Psapi.h>
+
 void SetHooks::HookSyscalls()
 {
 	oCreateProcessInternalW = (CreateProcessInternalW_t)GetProcAddress(GetModuleHandleA("kernelbase.dll"), "CreateProcessInternalW");
@@ -33,6 +36,14 @@ void SetHooks::HookSyscalls()
 	oRegOpenKeyExW = (RegOpenKeyExW_t)GetProcAddress(GetModuleHandleA("advapi32.dll"), "RegOpenKeyExW");
 	if (oRegOpenKeyExW)
 		ReverseHook::hook(oRegOpenKeyExW, hkRegOpenKeyExW, original_regopenkey_bytes);
+
+	oWriteProcessMemory = (WriteProcessMemory_t)GetProcAddress(GetModuleHandleA("kernel32.dll"), "WriteProcessMemory");
+	if (oWriteProcessMemory)
+		ReverseHook::hook(oWriteProcessMemory, hkWriteProcessMemory, original_writeprocessmemory_bytes);
+
+	oGetProcAddress = (GetProcAddress_t)GetProcAddress(GetModuleHandleA("kernel32.dll"), "GetProcAddress");
+	if (oGetProcAddress)
+		ReverseHook::hook(oGetProcAddress, hkGetProcAddress, original_getprocaddress_bytes);
 }
 
 void SetHooks::UnhookSyscalls()
@@ -60,6 +71,12 @@ void SetHooks::UnhookSyscalls()
 
 	if (oRegOpenKeyExW)
 		ReverseHook::unhook(oRegOpenKeyExW, original_regopenkey_bytes);
+
+	if (oWriteProcessMemory)
+		ReverseHook::unhook(oWriteProcessMemory, original_writeprocessmemory_bytes);
+
+	if (oGetProcAddress)
+		ReverseHook::unhook(oGetProcAddress, original_getprocaddress_bytes);
 }
 
 BOOL NTAPI SetHooks::hkCheckRemoteDebuggerPresent(HANDLE hProcess, PBOOL pbDebuggerPresent)
@@ -93,6 +110,15 @@ BOOL NTAPI SetHooks::hkCreateProcessInternalW(
 
 	Temp.functionName = "CreateProcessInternalW";
 	Temp.additionalInfo = ws2s(lpCommandLine);
+
+	// Prevent program from unloading sysmon driver
+	if (_wcsicmp(lpCommandLine, L"/c unload SysmonDrv")
+		|| _wcsicmp(lpCommandLine, L"fltMC.exe unload SysmonDrv"))
+	{
+		Temp.additionalInfo += " (blocked)";
+		interceptedCalls.push_back(Temp);
+		return FALSE;
+	}
 
 	interceptedCalls.push_back(Temp);
 
@@ -208,8 +234,11 @@ HRESULT NTAPI SetHooks::hkURLDownloadToFileA(LPUNKNOWN pCaller, LPCSTR szURL,
 {
 	InterceptedCallInfo Temp;
 
+	std::stringstream ss;
+	ss << "URL: " << szURL << " FileName: " << szFileName;
+
 	Temp.functionName = "URLDownloadToFileA";
-	Temp.additionalInfo = szURL;
+	Temp.additionalInfo = ss.str();
 
 	interceptedCalls.push_back(Temp);
 
@@ -218,6 +247,57 @@ HRESULT NTAPI SetHooks::hkURLDownloadToFileA(LPUNKNOWN pCaller, LPCSTR szURL,
 	const auto result = oURLDownloadToFileA(pCaller, szURL, szFileName, dwReserved, lpfnCB);
 
 	ReverseHook::hook(oURLDownloadToFileA, hkURLDownloadToFileA, original_urlmoniker_bytes);
+
+	return result;
+}
+
+BOOL SetHooks::hkWriteProcessMemory(HANDLE hProcess, LPVOID lpBaseAddress, LPCVOID lpBuffer, SIZE_T nSize,
+	SIZE_T* lpNumberOfBytesWritten)
+{
+	InterceptedCallInfo Temp;
+
+	std::stringstream ss;
+	ss << "Base Address: " << std::hex << lpBaseAddress << " Buffer: " << lpBuffer << " Size: " << nSize;
+
+	Temp.functionName = "WriteProcessMemory";
+	Temp.additionalInfo = ss.str();
+
+	interceptedCalls.push_back(Temp);
+
+	ReverseHook::unhook(oWriteProcessMemory, original_writeprocessmemory_bytes);
+
+	const auto result = oWriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize,
+		lpNumberOfBytesWritten);
+
+	ReverseHook::hook(oWriteProcessMemory, hkWriteProcessMemory, original_writeprocessmemory_bytes);
+
+	return result;
+}
+
+FARPROC SetHooks::hkGetProcAddress(HMODULE hModule, LPCSTR lpProcName)
+{
+	InterceptedCallInfo Temp;
+
+	std::stringstream ss;
+
+	Temp.functionName = "GetProcAddress";
+
+	ss << "Module: " << std::hex << hModule << " ProcName: " << lpProcName;
+
+	Temp.additionalInfo = ss.str();
+	
+	ReverseHook::unhook(oGetProcAddress, original_getprocaddress_bytes);
+
+	auto result = oGetProcAddress(hModule, lpProcName);
+	if (result == oGetProcAddress(LoadLibraryA("sysmondrv"), "Unload"))
+	{
+		Temp.additionalInfo.append(" (blocked)");
+		result = nullptr;
+	}
+
+	interceptedCalls.push_back(Temp);
+
+	ReverseHook::hook(oGetProcAddress, hkGetProcAddress, original_getprocaddress_bytes);
 
 	return result;
 }
