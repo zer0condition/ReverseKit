@@ -2,6 +2,7 @@
 
 #include <d3d9.h>
 #include <d3d9types.h>
+#include <stdexcept>
 
 #include "D3DWindow.h"
 #include "ImGuiSetup.h"
@@ -44,13 +45,17 @@ DWORD WINAPI RenderThread([[maybe_unused]] LPVOID lpParameter)
         RenderUI();
 
         ImGui::EndFrame();
-        g_pd3dDevice->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
+        const HRESULT Clear = g_pd3dDevice->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0, 1.0f, 0);
+        if (Clear != D3D_OK)
+            throw std::runtime_error("Clear didn't return D3D_OK");
 
         if (g_pd3dDevice->BeginScene() >= 0)
         {
             ImGui::Render();
             ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-            g_pd3dDevice->EndScene();
+            const HRESULT EndScene = g_pd3dDevice->EndScene();
+            if (EndScene != D3D_OK)
+                throw std::runtime_error("EndScene didn't return D3D_OK");
         }
 
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
@@ -59,7 +64,7 @@ DWORD WINAPI RenderThread([[maybe_unused]] LPVOID lpParameter)
             ImGui::RenderPlatformWindowsDefault();
         }
 
-        const HRESULT result = g_pd3dDevice->Present(NULL, NULL, NULL, NULL);
+        const HRESULT result = g_pd3dDevice->Present(nullptr, nullptr, nullptr, nullptr);
         if (result == D3DERR_DEVICELOST && g_pd3dDevice->TestCooperativeLevel() == D3DERR_DEVICENOTRESET) {
             ResetD3DDevice();
         }
