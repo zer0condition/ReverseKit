@@ -26,7 +26,7 @@
   <li>Threads - lists thread ids along with cpu usage, allows you to suspend them with a button.</li>
   <li>Bypass common debugger checks - CheckRemoteDebugger() and IsDebuggerPresent().</li>
   <li>Anti-BSOD for common usermode BSOD methods which abuse RtlAdjustPrivilege.</li>
-  <li>Prevent sysmon driver from being loaded.</li>
+  <li>Prevent sysmon driver from being unloaded.</li>
   <li>Easy-to-use interface powered by ImGui.</li>
   <li>Hook library with a normal JMP hook and trampoline hook.</li>
 </ul>
