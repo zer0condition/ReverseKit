@@ -59,5 +59,5 @@ void GetThreadInformation() {
 
 	CloseHandle(hThreadSnap);
 
-	threadInfo = updatedThreadInfo;
+	threadInfo = std::move(updatedThreadInfo);
 }

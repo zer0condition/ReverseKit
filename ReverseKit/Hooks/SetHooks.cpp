@@ -112,8 +112,8 @@ BOOL NTAPI SetHooks::hkCreateProcessInternalW(
 	Temp.additionalInfo = ws2s(lpCommandLine);
 
 	// Prevent program from unloading sysmon driver
-	if (_wcsicmp(lpCommandLine, L"unload SysmonDrv")
-		|| _wcsicmp(lpCommandLine, L"fltMC.exe unload SysmonDrv"))
+	if (!_wcsicmp(lpCommandLine, L"unload SysmonDrv")
+		|| !_wcsicmp(lpCommandLine, L"fltMC.exe unload SysmonDrv"))
 	{
 		Temp.additionalInfo += " (blocked)";
 		interceptedCalls.push_back(Temp);
@@ -121,7 +121,7 @@ BOOL NTAPI SetHooks::hkCreateProcessInternalW(
 	}
 
 	// Prevent program from clearing windows event logs
-	if (_wcsicmp(lpCommandLine, L"wevtutil cl Setup & wevtutil cl System & wevtutil cl Security & wevtutil cl Application & fsutil usn deletejournal /D %c:"))
+	if (!_wcsicmp(lpCommandLine, L"wevtutil cl Setup & wevtutil cl System & wevtutil cl Security & wevtutil cl Application & fsutil usn deletejournal /D %c:"))
 	{
 		Temp.additionalInfo += " (blocked)";
 		interceptedCalls.push_back(Temp);
