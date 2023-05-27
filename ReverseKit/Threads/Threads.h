@@ -7,7 +7,7 @@ struct ThreadInfo
     DWORD threadId;
     DWORD cpuUsage;
 
-    bool operator==(const ThreadInfo& other) const
+    bool operator==(const ThreadInfo other) const
 	{
         return threadId == other.threadId;
     }
