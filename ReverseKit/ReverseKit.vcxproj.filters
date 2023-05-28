@@ -65,6 +65,7 @@
     <ClCompile Include="Imports\Imports.cpp" />
     <ClCompile Include="Instrumentation\InstrumentationCallback.cpp" />
     <ClCompile Include="Window\D3DWindow.cpp" />
+    <ClCompile Include="Heaps\Heaps.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ReverseLib\ReverseHook.h">
@@ -120,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="Instrumentation\InstrumentationCallback.h">
       <Filter>Window\Instrumentation</Filter>
+    </ClInclude>
+    <ClInclude Include="Heaps\Heaps.h">
+      <Filter>ReverseLib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

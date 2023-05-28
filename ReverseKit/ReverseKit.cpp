@@ -7,12 +7,14 @@
 #include "Hooks/SetHooks.h"
 #include "Menu/Menu.h"
 #include "Window/Render.h"
+#include "Heaps/Heaps.h"
 
 DWORD WINAPI RetrievalThread(LPVOID lpParameter)
 {
     while (true) {
         GetImportsFromIAT();
         GetThreadInformation();
+        GetHeapsInformation();
         Sleep(5000);
     }
 }

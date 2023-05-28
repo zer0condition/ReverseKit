@@ -11,6 +11,7 @@
 #include "../Imports/Imports.h"
 #include "../Instrumentation/InstrumentationCallback.h"
 #include "../Threads/Threads.h"
+#include "../Heaps/Heaps.h"
 
 void DrawInstrumentationInformation()
 {
@@ -119,18 +120,55 @@ void DrawHookedFunctions()
 	ImGui::End();
 }
 
+const char* HeapFlagsStr(DWORD flags)
+{
+	switch (flags)
+	{
+	case 0x00000001:
+		return "LF32_FIXED";
+	case 0x00000002:
+		return "LF32_FREE";
+	case 0x00000004:
+		return "LF32_MOVEABLE";
+	default:
+		return "<invalid>";
+	}
+}
+
+void DrawHeaps()
+{
+	ImGui::Begin("[ReverseKit] Heaps");
+	ImGui::SetWindowSize(ImVec2(600, 600), ImGuiCond_Once);
+
+	ImGui::Columns(3, "import_columns", true);
+
+	ImGui::Text("Flags"); ImGui::NextColumn();
+	ImGui::Text("ID"); ImGui::NextColumn();
+	ImGui::Text("Address"); ImGui::NextColumn();
+	ImGui::Separator();
+
+	for (const auto& info : heaps) {
+		ImGui::Text("%s", HeapFlagsStr(info.flags)); ImGui::NextColumn();
+		ImGui::Text("%i", info.id); ImGui::NextColumn();
+		ImGui::Text("%p", info.address); ImGui::NextColumn();
+	}
+
+	ImGui::End();
+}
+
 void RenderUI()
 {
 	static bool showThreads = false;
 	static bool showImports = true;
 	static bool showHookedFunctions = false;
 	static bool showInstrumentation = false;
+	static bool showHeaps = false;
 
 	RECT rect{};
 	SystemParametersInfo(SPI_GETWORKAREA, 0, &rect, 0);
 	const int screenWidth = rect.right - rect.left;
 	[[maybe_unused]] int screenHeight = rect.bottom - rect.top;
-	const ImVec2 windowSize(390, 0);
+	const ImVec2 windowSize(440, 0);
 
 	ImGui::SetNextWindowPos(ImVec2((screenWidth / 2) - (windowSize.x / 2), 0));
 	ImGui::SetNextWindowSize(windowSize);
@@ -186,6 +224,18 @@ void RenderUI()
 
 	ImGui::PopStyleColor();
 
+	ImGui::SameLine();
+
+	if (showHeaps)
+		ImGui::PushStyleColor(ImGuiCol_Button, activeButtonColor);
+	else
+		ImGui::PushStyleColor(ImGuiCol_Button, inactiveButtonColor);
+
+	if (ImGui::Button("Heaps"))
+		showHeaps = !showHeaps;
+
+	ImGui::PopStyleColor();
+
 	ImGui::End();
 
 	if (showInstrumentation)
@@ -196,4 +246,6 @@ void RenderUI()
 		DrawImports();
 	if (showHookedFunctions)
 		DrawHookedFunctions();
+	if (showHeaps)
+		DrawHeaps();
 }
