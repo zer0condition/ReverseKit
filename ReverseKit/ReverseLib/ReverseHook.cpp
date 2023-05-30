@@ -15,10 +15,10 @@ void ReverseHook::hook(void* original_function, void* hooked_function, unsigned 
 	*/
 
 	*(unsigned char*)original_function = 0x48;
-	*(unsigned char*)((unsigned char*)original_function + 1) = 0xB8;
+	*((unsigned char*)original_function + 1) = 0xB8;
 	*(int64_t*)((unsigned char*)original_function + 2) = (int64_t)hooked_function;
-	*(unsigned char*)((unsigned char*)original_function + 10) = 0xFF;
-	*(unsigned char*)((unsigned char*)original_function + 11) = 0xE0;
+	*((unsigned char*)original_function + 10) = 0xFF;
+	*((unsigned char*)original_function + 11) = 0xE0;
 
 	VirtualProtect(original_function, 14, oldProtect, &oldProtect);
 }
@@ -47,10 +47,10 @@ void* ReverseHook::Trampoline::createTrampoline(void* original_function)
 		jmp rax
 	*/
 	*(unsigned char*)trampoline = 0x48;
-	*(unsigned char*)((unsigned char*)trampoline + 1) = 0xB8;
+	*((unsigned char*)trampoline + 1) = 0xB8;
 	*(void**)((unsigned char*)trampoline + 2) = original_function;
-	*(unsigned char*)((unsigned char*)trampoline + 10) = 0xFF;
-	*(unsigned char*)((unsigned char*)trampoline + 11) = 0xE0;
+	*((unsigned char*)trampoline + 10) = 0xFF;
+	*((unsigned char*)trampoline + 11) = 0xE0;
 
 	return trampoline;
 }
@@ -74,12 +74,12 @@ void ReverseHook::Trampoline::hook(void* original_function, void* hooked_functio
 	*/
 
 	*(unsigned char*)original_function = 0x48;
-	*(unsigned char*)((unsigned char*)original_function + 1) = 0xB8;
+	*((unsigned char*)original_function + 1) = 0xB8;
 	*(void**)((unsigned char*)original_function + 2) = hooked_function;
-	*(unsigned char*)((unsigned char*)original_function + 10) = 0xFF;
-	*(unsigned char*)((unsigned char*)original_function + 11) = 0xE0;
+	*((unsigned char*)original_function + 10) = 0xFF;
+	*((unsigned char*)original_function + 11) = 0xE0;
 
-	*(unsigned char*)((unsigned char*)trampoline + 14) = 0xE9;
+	*((unsigned char*)trampoline + 14) = 0xE9;
 
 	*(int*)((unsigned char*)trampoline + 15)
 		= (int)((unsigned char*)original_function + 14 - ((unsigned char*)trampoline + 14));

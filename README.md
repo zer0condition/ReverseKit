@@ -24,6 +24,7 @@
   <li>Intercept all thread creations - APIs like std::thread, CreateThread(), etc.</li>
   <li>Intercept URLs - APIs like UrlDownloadToFileA and InternetOpenUrlA, etc.</li>
   <li>Threads - lists thread ids along with cpu usage, allows you to suspend them with a button.</li>
+  <li>Heaps information - address, id and flags.</li>
   <li>Bypass common debugger checks - CheckRemoteDebugger() and IsDebuggerPresent().</li>
   <li>Anti-BSOD for common usermode BSOD methods which abuse RtlAdjustPrivilege.</li>
   <li>Prevent sysmon driver from being unloaded.</li>

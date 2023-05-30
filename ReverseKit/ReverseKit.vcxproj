@@ -52,6 +52,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Heaps\Heaps.cpp" />
     <ClCompile Include="Hooks\SetHooks.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
@@ -71,6 +72,7 @@
     <ClCompile Include="Window\Render.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Heaps\Heaps.h" />
     <ClInclude Include="Hooks\SetHooks.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
